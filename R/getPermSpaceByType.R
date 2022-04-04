@@ -1,0 +1,87 @@
+#' Get permutation space by specifying type
+#' @export getPermSpaceByType
+#' @importFrom methods hasArg
+#' @importFrom GenomicFeatures fiveUTRsByTranscript threeUTRsByTranscript cdsBy transcriptsBy exonsBy
+#'
+#' @description This function can return 5'UTR/CDS/3'UTR/mRNA/full transcripts grouped by transcript ids.
+#'
+#' @usage getPermSpaceByType(txdb, type = 'mature')
+#'
+#' @param txdb A txdb object.
+#' @param type A character object. Default is 'mature'. It accepts options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which one can get corresponding types of regions over transcriptome.
+#'
+#' @return A \code{GRangesList} object.
+#'
+#' @seealso \code{\link{getPermSpaceByTxID}}, \code{\link{getPermSpaceByFeatures}}
+#'
+#' @examples
+#' library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+#' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+#' permSpace <- getPermSpaceByType(txdb, type = "CDS")
+getPermSpaceByType <- function(txdb, type = "mature") {
+
+    # make sure the inputs are reasonable
+    if (!is(type, "character")) {
+        stop("type must be character.")
+    }
+
+    regions.A <- NULL
+    if (type == "mature") {
+        exons.tx0 <- exonsBy(txdb, by = c("tx", "gene"), use.names = FALSE)
+        regions.A <- exons.tx0
+    }
+    if (type == "fiveUTR") {
+        fiveUTR.tx0 <- fiveUTRsByTranscript(txdb, use.names = FALSE)
+        regions.A <- fiveUTR.tx0
+    }
+    if (type == "threeUTR") {
+        threeUTR.tx0 <- threeUTRsByTranscript(txdb, use.names = FALSE)
+        regions.A <- threeUTR.tx0
+    }
+    if (type == "CDS") {
+        cds.tx0 <- cdsBy(txdb, use.names = FALSE)
+        regions.A <- cds.tx0
+    }
+    if (type == "full") {
+        trans.tx0 <- transcriptsBy(txdb, "gene")
+        trans.tx0.df <- data.frame(trans.tx0)
+        trans.tx0.id <- trans.tx0.df[, "tx_id"]
+        # RefSeqID
+        RefSeqID <- as.character(trans.tx0.id)
+        # targetName
+        targetName <- trans.tx0.df[, "seqnames"]
+        targetName <- as.character(targetName)
+        # strand
+        strand <- trans.tx0.df[, "strand"]
+        strand <- as.character(strand)
+        # blockSizes
+        blockSizes <- trans.tx0.df[, "width"]
+        blockSizes <- lapply(blockSizes, function(x) {
+            process1 <- paste0(x, ",")
+            return(process1)
+        })
+        blockSizes <- unlist(blockSizes)
+        # targetStart
+        targetStart <- trans.tx0.df[, "start"]
+        targetStart <- lapply(targetStart, function(x) {
+            process1 <- paste0(x, ",")
+            return(process1)
+        })
+        targetStart <- unlist(targetStart)
+
+        A.frags <- cbind(RefSeqID, targetName, strand, targetStart, blockSizes)
+        A.frags <- data.frame(A.frags)
+        regions.A <- with(A.frags, makeGRangesListFromFeatureFragments(
+            seqnames = targetName,
+            fragmentStarts = targetStart, fragmentWidths = blockSizes,
+            strand = strand
+        ))
+        names(regions.A) <- A.frags$RefSeqID
+    }
+
+    if (is.null(regions.A)) {
+        stop("type must come from one of these options: 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR'.")
+    }
+
+    return(regions.A)
+}
