@@ -3,10 +3,7 @@ Title: Colocalization analysis of transcriptome elements in the presence of isof
 Version: 0.99.1
 Authors@R: c(
     person("Yue", "Wang", , "m18896977776@163.com", role = c("aut", "cre")),
-    person("Jia", "Meng", , "jia.meng@xjtlu.edu.cn", role = c("aut")),
-    person("Zhen", "Wei", , role = c("aut")), 
-    person("Jionglong", "Su", , role = c("aut")),
-    person("Frans", "Coenen", ,role = c("aut")))
+    person("Jia", "Meng", , "jia.meng@xjtlu.edu.cn", role = c("aut")))
 Description: RgnTX allows the integration of transcriptome annotations so as to model the complex alternative splicing patterns. It supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations. It involves functions that do permutaion test for evaluating association between features and transcriptome regions. 
 License: Artistic-2.0
 Encoding: UTF-8
