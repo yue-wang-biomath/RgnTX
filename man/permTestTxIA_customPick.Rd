@@ -31,8 +31,10 @@ ev_function_1 = overlapCountsTxIA, ev_function_2 = overlapCountsTx,  pval_z = FA
 A list object, which is defined to be \code{permTestTx.results} class. It contains the following information:
 \itemize{
 \item \bold{\code{RSL:}} Randomized region sets of \code{RS1}.
-\item \bold{\code{orig.ev:}} The value of weighted overlapping counts between RS1 and RS2.
-\item \bold{\code{rand.ev:}} The values of overlapping counts between each element in RSL and RS2.
+\item \bold{\code{RS1:}} The feature set to be randomized.
+\item \bold{\code{RS2:}} The region set to be compared with the feature set.
+\item \bold{\code{orig.ev:}} The value of overlapping counts between \code{RS1} and \code{RS2}.
+\item \bold{\code{rand.ev:}} The values of overlapping counts between each element in \code{RSL} and \code{RS2}.
 \item \bold{\code{pval:}} p-value of the test.
 \item \bold{\code{zscore:}} Standard score of the test.
 }
