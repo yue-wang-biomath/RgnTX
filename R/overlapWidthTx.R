@@ -1,15 +1,15 @@
-#' Evaluation function.
+#' Evaluation function
 #' @export overlapWidthTx
 #' @importFrom IRanges countOverlaps
 #' @importFrom regioneR overlapRegions
 #'
-#' @description Evaluation function. This function returns the sum of overlapping width between two region sets.
+#' @description Evaluation function. This function returns the sum of widths of each overlap between two region sets,  i.e., the total number of overlapping nucleotides between two input region sets.
 #'
 #' @usage overlapWidthTx(A, B, ...)
 #'
 #' @param A Region set 1. A \code{Granges} or \code{GRangesList} object.
 #' @param B Region set 2. A \code{Granges} or \code{GRangesList} object.
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
 #' @return A \code{numeric} object.
 #'

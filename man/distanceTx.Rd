@@ -2,7 +2,7 @@
 % Please edit documentation in R/distanceTx.R
 \name{distanceTx}
 \alias{distanceTx}
-\title{Evaluation function.}
+\title{Evaluation function}
 \usage{
 distanceTx(A, B, beta = 0.2, ...)
 }
@@ -13,7 +13,7 @@ distanceTx(A, B, beta = 0.2, ...)
 
 \item{beta}{It is a user-defined argument that can filter out the corresponding percent of largest distance values. Default value is 0.2.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{numeric} object.

@@ -1,14 +1,17 @@
-#' Convert a GRanges object to a GRangesList object.
+#' Convert a GRanges object to a GRangesList object
 #' @export GRanges2GRangesList
 #' @importFrom GenomicRanges GRanges
 #'
-#' @description Convert a \code{GRanges} object to a \code{GRangesList} object.
+#' @description Convert a \code{GRanges} object to a \code{GRangesList} object. The output region set follows the format required by the main permutation test functions.
 #'
 #' @usage GRanges2GRangesList(A = NULL)
 #'
-#' @param A Input \code{GRanges} object.
+#' @param A A \code{GRanges} object.
 #'
-#' @details Input \code{GRanges} object can have a metadata named as 'group'. Ranges with the same group will be assigned to the same list element.
+#' @details If input \code{GRanges} object has a metadata named as "group",
+#' ranges having the same group number is a region. If not, a range is a region.
+#' A region in the input set will be outputted as a list element IN returned
+#' \code{GRangesList} object.
 #'
 #' @return A \code{GRangesList} object.
 #'

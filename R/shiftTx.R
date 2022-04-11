@@ -1,18 +1,18 @@
-#' Shift over transcripts.
+#' Shift over transcripts
 #' @export shiftTx
 #'
-#' @description Calculate positional shift over transcript regions.
+#' @description Calculate positional shifting over transcript regions. This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
 #'
 #' @usage shiftTx(regions, start, width, direction, strand)
 #'
-#' @param regions A feature set that follows the format indicated in vignette section 3. Either to be GRanges or GRangesList.
-#' @param start A vector of starting positions, in which each value must be relative to each input feature.
-#' @param width  A vector of integers, the width of each region to be picked from each feature.
-#' @param direction The direction of displacement. It has options 'left' and 'right'. 'left' means shifting to 5' while 'right' to 3'.
-#' @param strand The strand type of the transcripts. It receives '+' or '-'.
+#' @param regions A feature set following the format indicated in vignette section 3. Either to be \code{GRanges} or \code{GRangesList}.
+#' @param start Starting positions. Each value represents a starting position in each input feature.
+#' @param width Widths. Each value represents a width of each region to be picked from each feature.
+#' @param direction Either to be character "left" or "right", which means the direction to which the starting position is shifting. The former means moving to the direction of 5' while the latter means moving to 3'.
+#' @param strand The strand type of the transcripts. It receives "+" or "-".
 #'
 #' @return
-#' A Granges object.
+#' A \code{Granges} object.
 #'
 #' @examples
 #' # Take five transcripts.
@@ -29,9 +29,17 @@
 #'
 #' width <- 200
 #' start = as.numeric(max(end(cds.p)))
-#' R.cds.last200 <- shiftTx(cds.p, start = start, width = width, direction = 'left', strand = "+")
+#' R.cds.last200 <- shiftTx(cds.p, start = start, width = width,
+#' direction = 'left', strand = "+")
 
 shiftTx = function(regions, start, width, direction, strand){
+    if (is(regions, "GRanges")) {
+        regions <- GRanges2GRangesList(regions)
+    }
+
+    if (!is(regions, "GRangesList")) {
+        stop("regions should be either GRanges or GRangesList.")
+    }
     disp <- data.frame(
         start = start,
         distance = width - 1,

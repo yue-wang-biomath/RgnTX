@@ -2,22 +2,22 @@
 % Please edit documentation in R/extractRegions.R
 \name{extractRegions}
 \alias{extractRegions}
-\title{Extract regions.}
+\title{Extract regions}
 \usage{
-extractRegions(regions_A, R, strand = '+')
+extractRegions(regions_A, R, strand = "+")
 }
 \arguments{
-\item{regions_A}{The scope region. A \code{GRangesList} object. The name of each list element should be the transcript id that it pertains to.}
+\item{regions_A}{The scope region set. A \code{GRangesList} object. The name of each list element should be the transcript id that it pertains to.}
 
-\item{R}{The target region. A GRanges object.}
+\item{R}{The target region set. A \code{GRanges} object.}
 
-\item{strand}{The strand type of the transcripts. It has options '+' and '-'.}
+\item{strand}{The strand type of the transcripts. It has options "+" and "-".}
 }
 \value{
 A \code{GRangesList} object.
 }
 \description{
-This function receives three arguments: the scope region, the target region and the type of strand. It returns a subset of target region, which is the intersection of the target region and the scope region.
+This function receives three arguments: the scope region set, the target region set and the type of strand. It returns a subset of target region set, which is the intersection of the target region set and the scope region set.
 }
 \examples{
 # Take five transcripts.

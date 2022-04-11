@@ -1,13 +1,13 @@
-#' Calculate shifted z scores.
+#' Plot shifted z scores
 #' @export plotShiftedZScoreTx
 #'
-#' @description Calculate shifted z scores for permutation test results.
+#' @description Plot shifted z scores for permutation test results.
 #'
 #' @usage plotShiftedZScoreTx(shitedZScoresTx_results)
 #'
 #' @param shitedZScoresTx_results A \code{shitedZScoreTx.results} object.
 #'
-#' @return A plot object.
+#' @return A plot.
 #'
 #' @seealso \code{\link{shiftedZScoreTx}}
 #' @examples

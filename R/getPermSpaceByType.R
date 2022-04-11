@@ -1,14 +1,13 @@
 #' Get permutation space by specifying type
 #' @export getPermSpaceByType
-#' @importFrom methods hasArg
 #' @importFrom GenomicFeatures fiveUTRsByTranscript threeUTRsByTranscript cdsBy transcriptsBy exonsBy
 #'
-#' @description This function can return 5'UTR/CDS/3'UTR/mRNA/full transcripts grouped by transcript ids.
+#' @description This function can return 5'UTR/CDS/3'UTR/mRNA/full part of transcriptome regions, following the format required by the main permutation test functions.
 #'
-#' @usage getPermSpaceByType(txdb, type = 'mature')
+#' @usage getPermSpaceByType(txdb, type = "mature")
 #'
-#' @param txdb A txdb object.
-#' @param type A character object. Default is 'mature'. It accepts options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which one can get corresponding types of regions over transcriptome.
+#' @param txdb A TxDb object.
+#' @param type A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.
 #'
 #' @return A \code{GRangesList} object.
 #'

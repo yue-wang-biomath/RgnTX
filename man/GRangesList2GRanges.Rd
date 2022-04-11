@@ -2,7 +2,7 @@
 % Please edit documentation in R/GRangesList2GRanges.R
 \name{GRangesList2GRanges}
 \alias{GRangesList2GRanges}
-\title{Convert a GRangesList object to a GRanges object.}
+\title{Convert a GRangesList object to a GRanges object}
 \usage{
 GRangesList2GRanges(A = NULL)
 }
@@ -13,7 +13,7 @@ GRangesList2GRanges(A = NULL)
 A \code{GRanges} object.
 }
 \description{
-Convert a \code{GRangesList} object to a \code{GRanges} object.
+Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the main permutation test functions.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

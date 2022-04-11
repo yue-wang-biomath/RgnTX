@@ -2,22 +2,22 @@
 % Please edit documentation in R/overlapCountsTxIA.R
 \name{overlapCountsTxIA}
 \alias{overlapCountsTxIA}
-\title{Evaluation function.}
+\title{Evaluation function}
 \usage{
 overlapCountsTxIA(A, B, ...)
 }
 \arguments{
-\item{A}{A DNA features.}
+\item{A}{A feature set, which should be \code{GRanges}.}
 
-\item{B}{A \code{GRangesList} object.}
+\item{B}{A region set, which should be \code{GRangesList}.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{numeric} object.
 }
 \description{
-Evaluation function. This function receives a DNA features and a transcriptome region set, and returns a weighted overlapping counts between them.
+Evaluation function. This function receives a feature set (with isoform ambiguity) and a transcriptome region set (without isoform ambiguity), and returns a weighted number of overlaps between them.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
@@ -35,5 +35,5 @@ RS2 <- getStopCodon(trans.ids, txdb = txdb)
 orig.ev <- overlapCountsTxIA(RS1, RS2)
 }
 \seealso{
-\code{\link{overlapWidthTx}}, \code{\link{distanceTx}}
+\code{\link{overlapWidthTx}}, \code{\link{distanceTx}}, \code{\link{overlapCountsTx}}
 }

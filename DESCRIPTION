@@ -11,9 +11,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 biocViews: AlternativeSplicing, Sequencing, RNASeq, MethylSeq, Transcription, SplicedAlignment
 Imports: 
-    AnnotationDbi,
     GenomeInfoDb,
-    GenomicAlignments,
     GenomicFeatures,
     GenomicRanges,
     ggplot2,

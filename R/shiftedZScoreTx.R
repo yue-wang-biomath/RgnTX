@@ -1,4 +1,4 @@
-#' Calculate shifted z scores.
+#' Calculate shifted z scores
 #' @export shiftedZScoreTx
 #'
 #' @description Calculate shifted z scores for permutation test results.
@@ -10,16 +10,16 @@
 #' @param txdb A TxDb object.
 #' @param window The window of the whole shifting.
 #' @param step The step of each shifting.
-#' @param ev_function_1 Evaluation function. Default is overlapCountsTx function provided by the \code{RgnTX}. Users can input a custom evaluation function via this argument.
-#' @param ... any additional parameters needed.
+#' @param ev_function_1 Evaluation function. Default is \code{overlapCountsTx}.
+#' @param ... Any additional parameters needed.
 #'
 #' @return
-#' A list object, which is defined to be \code{shitedZScore.results} class. It contains the following information:
+#' A list object, which is defined to be \code{shitedZScore.results} class. It contains the following items:
 #' \itemize{
-#' \item \bold{\code{shifted.z.scores}} Standard z-scores after shiftting.
-#' \item \bold{\code{window}} The window of the whole shifting.
-#' \item \bold{\code{step}} The step of each shifting.
-#' \item \bold{\code{original.z.score}} The original standard score.
+#' \item \bold{\code{shifted.z.scores:}} Standard z-scores after shifting.
+#' \item \bold{\code{window:}} Window of the whole shifting.
+#' \item \bold{\code{step:}} Step of each shifting.
+#' \item \bold{\code{original.z.score:}} Original standard score.
 #' }
 #'
 #' @seealso \code{\link{plotShiftedZScoreTx}}

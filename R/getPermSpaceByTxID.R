@@ -1,15 +1,14 @@
-#' Get permutation space by specifying transcript ids.
+#' Get permutation space by specifying transcript ids
 #'
 #' @export getPermSpaceByTxID
-#' @import AnnotationDbi
 #'
-#' @description This function can return 5'UTR/CDS/3'UTR/mRNA/full transcripts grouped by corresponding transcript ids.
+#' @description This function returns 5'UTR/CDS/3'UTR/mRNA/full part of transcriptome regions grouped by corresponding transcript ids.
 #'
-#' @usage getPermSpaceByTxID(trans_ids = 'all', txdb, type = 'mature')
+#' @usage getPermSpaceByTxID(trans_ids = "all", txdb, type = "mature")
 #'
-#' @param trans_ids A character object. The transcript ids. Default is 'all'. If it takes the default value 'all', the space that users get will be the whole transcriptome.
-#' @param txdb A txdb object.
-#' @param type A character object. Default is 'mature'. It accepts options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which one can get corresponding types of regions over transcriptome.
+#' @param trans_ids A character object. The transcript ids. Default is "all". If it takes the default value "all", the space that users get will be the whole transcriptome.
+#' @param txdb A TxDb object.
+#' @param type A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.
 #'
 #' @return A \code{GRangesList} object.
 #'
@@ -33,7 +32,7 @@ getPermSpaceByTxID <- function(trans_ids = "all", txdb, type = "mature") {
         trans.ids <- names(regions.A)
     } else {
         trans.ids <- as.character(trans.ids)
-        trans.ids <- intersect(trans.ids, names(regions.A))
+        trans.ids <- trans.ids[is.element(trans.ids, names(regions.A))]
     }
 
     if (length(trans.ids) != 0) {

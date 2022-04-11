@@ -1,36 +1,34 @@
-#' Perform permutation test.
+#' Perform permutation test
 #' @export permTestTx_customPick
 #'
-#' @description Perform permutation test for evaluating spatial association between RNA features and a specified kind of regions. The latter is defined by the \code{customPick_function} argument input by users.
+#' @description Perform permutation test for evaluating spatial association between a feature set and the customPick regions. The latter is defined by the \code{customPick_function} argument provided by users.
 #'
 #' @usage permTestTx_customPick(RS1 = NULL, txdb = NULL, type = "mature",
 #' customPick_function = NULL, ntimes = 50, ev_function_1 = overlapCountsTx,
 #' ev_function_2 = overlapCountsTx,  pval_z = FALSE, ...)
 #'
-#' @param RS1 The region set to be randomized. It should be in the \code{GRanges} or \code{GRangesList} format.
-#' @param txdb A txdb object.
-#' @param type This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR'. It decides which types of space that the features being randomized into.
+#' @param RS1 The feature set to be randomized. It should be in the \code{GRanges} or \code{GRangesList} format.
+#' @param txdb A TxDb object.
+#' @param type A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.
 #' @param customPick_function A custom function needs to be inputted by users. The custom function should have two arguments: a txdb object and a character object of transcript ids. It returns a part of region of each transcript.
 #' @param ntimes Randomization times.
-#' @param ev_function_1 Evaluation function defines what statistic to be tested between RS1 and RS2. Default is overlapCountsTx_one2one.
-#' @param ev_function_2 Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is overlapCountsTx_one2one.
+#' @param ev_function_1 Evaluation function defines what statistic to be tested between RS1 and RS2. Default is \code{overlapCountsTx}.
+#' @param ev_function_2 Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is \code{overlapCountsTx}.
 #' @param pval_z Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
 #' @details
-#' The transcript where each RNA feature comes from should be available. Each RNA feature is only mapped with a part of region on its transcript (picked by the \code{customPick_function}). The output \code{orig.ev} is the number of features that have overlap with its specified region.
-#' This test function also randomizes input features per transcript. The set of randomized results is outputted as \code{RSL}. The overlapping counts between each set in \code{RSL} with \code{RS2} is outputted as \code{rand.ev}.
+#' Each feature in \code{RS1} is only mapped with the customPick regions over its transcript (picked by the \code{customPick_function}). The output \code{orig.ev} is the number of features that have overlap with its customPick region.
+#' The set of randomized region sets is outputted as \code{RSL}. The overlapping counts between each set in \code{RSL} with \code{RS2} is outputted as \code{rand.ev}.
 #'
 #' @return
-#' A list object, which is defined to be \code{permTestTx.results} class. It contains the following information:
+#' A list object, which is defined to be \code{permTestTx.results} class. It contains the following items:
 #' \itemize{
 #' \item \bold{\code{RSL}} Randomized region sets of \code{RS1}.
-#' \item \bold{\code{RS1}} Features.
-#' \item \bold{\code{RS2}} Region set to be compared with.
 #' \item \bold{\code{orig.ev}} The value of overlapping counts between RS1 and RS2.
 #' \item \bold{\code{rand.ev}} The values of overlapping counts between each element in RSL and RS2.
-#' \item \bold{\code{pval}} The p-value of the test.
-#' \item \bold{\code{zscore}} The standard score of the test.
+#' \item \bold{\code{pval}} p-value of the test.
+#' \item \bold{\code{zscore}} Standard score of the test.
 #' }
 #'
 #' @seealso \code{\link{plotPermResults}}
@@ -40,7 +38,8 @@
 #' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 #' exons.tx0 <- exonsBy(txdb)
 #' trans.ids <- sample(names(exons.tx0), 100)
-#' RS1 <- randomizeTx(txdb, trans.ids, random_num = 100, random_length = 200, type = 'CDS')
+#' RS1 <- randomizeTx(txdb, trans.ids, random_num = 100,
+#' random_length = 200, type = 'CDS')
 #' getCDS = function(txdb, trans.id){
 #' cds.tx0 <- cdsBy(txdb, use.names=FALSE)
 #'     cds.names <- as.character(intersect(names(cds.tx0), trans.id))
@@ -49,8 +48,7 @@
 #' }
 #'
 #' permTestTx_results <- permTestTx_customPick(RS1,txdb,
-#'                                             customPick_function = getCDS,
-#'                                             ntimes = 5)
+#' customPick_function = getCDS, ntimes = 5)
 
 permTestTx_customPick <- function(RS1 = NULL, txdb = NULL, type = "mature", customPick_function = NULL, ntimes = 50, ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE, ...) {
     if (is(RS1, "GRanges")) {

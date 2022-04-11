@@ -2,43 +2,40 @@
 % Please edit documentation in R/permTestTx_customAll.R
 \name{permTestTx_customAll}
 \alias{permTestTx_customAll}
-\title{Perform permutation test.}
+\title{Perform permutation test}
 \usage{
 permTestTx_customAll(RSL = NULL, RS1 = NULL, RS2 = NULL,
 ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE, ...)
 }
 \arguments{
-\item{RSL}{Randomized region sets of \code{RS1}. It should be a list object with each element being in the \code{GRanges} or \code{GRangesList} format.}
+\item{RSL}{Randomized region sets of \code{RS1}. It should be a list object and each element should be in the \code{GRanges} or \code{GRangesList} format.}
 
-\item{RS1}{The region set to be randomized. It should be in the \code{GRanges} or \code{GRangesList} format.}
+\item{RS1}{The region set. It should be in the \code{GRanges} or \code{GRangesList} format.}
 
 \item{RS2}{The region set to be compared with. It should be in the \code{GRanges} or \code{GRangesList} format.}
 
-\item{ev_function_1}{Evaluation function defines what statistic to be tested between RS1 and RS2. Default is overlapCountsTx.}
+\item{ev_function_1}{Evaluation function defines what statistic to be tested between RS1 and RS2. Default is  \code{overlapCountsTx}.}
 
-\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is overlapCountsTx.}
+\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is  \code{overlapCountsTx}.}
 
-\item{pval_z}{Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.}
+\item{pval_z}{Boolean. Default is FALSE. If FALSE, p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, p-value is calculated based on a z-test.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A list object, which is defined to be \code{permTestTx.results} class. It contains the following items:
 \itemize{
-\item \bold{\code{RSL}}
-\item \bold{\code{RS1}}
-\item \bold{\code{RS2}}
-\item \bold{\code{orig.ev}} The value of the test statistc between RS1 and RS2.
-\item \bold{\code{rand.ev}} The values of the test statistc between each element in RSL and RS2.
-\item \bold{\code{pval}} The p-value of the test.
-\item \bold{\code{zscore}} The standard score of the test.
+\item \bold{\code{orig.ev:}} The value of the test statistc between RS1 and RS2.
+\item \bold{\code{rand.ev:}} The values of the test statistc between each element in RSL and RS2.
+\item \bold{\code{pval:}} p-value of the test.
+\item \bold{\code{zscore:}} Standard score of the test.
 }
 }
 \description{
 Perform permutation test for evaluating spatial association between region sets. This permutation test function receives two region sets and a set of randomized region sets of one of them. It evaluates if there is an association between these two region sets.
 }
 \details{
-\code{permTestTx_customAll} will use evaluation function to calculate the test statistic value between \code{RS1} and \code{RS2}, and the statistic values between \code{RSL} and \code{RS2}. It will also return a p-value and a z-score.
+\code{permTestTx_customAll} will use evaluation function \code{ev_function_1} to calculate the test statistic between \code{RS1} and \code{RS2}, and use \code{ev_function_2} to evaluate the statistic between \code{RSL} and \code{RS2}. It will also return a p-value and a z-score.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

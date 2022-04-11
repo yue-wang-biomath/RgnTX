@@ -2,7 +2,7 @@
 % Please edit documentation in R/permTestTxIA_customPick.R
 \name{permTestTxIA_customPick}
 \alias{permTestTxIA_customPick}
-\title{Perform permutation test.}
+\title{Perform permutation test}
 \usage{
 permTestTxIA_customPick(RS1 = NULL, txdb = NULL, type = 'mature',
 customPick_function = NULL, ntimes = 50,
@@ -11,40 +11,38 @@ ev_function_1 = overlapCountsTxIA, ev_function_2 = overlapCountsTx,  pval_z = FA
 \arguments{
 \item{RS1}{The region set to be randomized. It should be in the \code{GRanges} or \code{GRangesList} format.}
 
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
-\item{type}{This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR'. It decides which types of space that the features being randomized into.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 
-\item{customPick_function}{A custom function needs to be input by users. The custom function should have two arguments: a txdb object and a character object of transcript ids. It returns a specified region over each transcript.}
+\item{customPick_function}{A custom function needs to be inputted by users. The customPick function should have two arguments: a TxDb object and a character object of transcript ids. It returns a specified region over each transcript.}
 
 \item{ntimes}{Randomization times.}
 
-\item{ev_function_1}{Evaluation function defines what statistic to be tested between RS1 and RS2. Default is overlapCountsTxIA.}
+\item{ev_function_1}{Evaluation function defines what statistic to be tested between \code{RS1} and \code{RS2}. Default is \code{overlapCountsTxIA}.}
 
-\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is overlapCountsTx.}
+\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in \code{RSL} and \code{RS2}. Default is \code{overlapCountsTx}.}
 
 \item{pval_z}{Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A list object, which is defined to be \code{permTestTx.results} class. It contains the following information:
 \itemize{
-\item \bold{\code{RSL}} Randomized region sets of \code{RS1}.
-\item \bold{\code{RS1}} Features.
-\item \bold{\code{RS2}} Region set to be compared with.
-\item \bold{\code{orig.ev}} The value of weighted overlapping counts between RS1 and RS2.
-\item \bold{\code{rand.ev}} The values of overlapping counts between each element in RSL and RS2.
-\item \bold{\code{pval}} The p-value of the test.
-\item \bold{\code{zscore}} The standard score of the test.
+\item \bold{\code{RSL:}} Randomized region sets of \code{RS1}.
+\item \bold{\code{orig.ev:}} The value of weighted overlapping counts between RS1 and RS2.
+\item \bold{\code{rand.ev:}} The values of overlapping counts between each element in RSL and RS2.
+\item \bold{\code{pval:}} p-value of the test.
+\item \bold{\code{zscore:}} Standard score of the test.
 }
 }
 \description{
 Perform permutation test for evaluating spatial association between RNA features and a specified kind of regions. The latter is defined by the \code{customPick_function} argument input by users. The difference between this function and  \code{\link{permTestTx_customPick}} is that it is for RNA-related genomic features that have isoform ambiguity, i.e., features that one does not know which transcript they comes from.
 }
 \details{
-\code{permTestTxIA_customPick} will assess the relation between RS1 and RSL, and the relation between \code{RS1} and \code{RS2}.
-Each RNA feature is only mapped with a part of region on its transcript (picked by the \code{customPick_function}). The output \code{orig.ev} is the weighted counts between \code{RS1} and \code{RS2}. For example, if a feature in \code{RS1} have overlap
+\code{permTestTxIA_customPick} will assess the test statistic between \code{RS1} and each region in \code{RSL}, and the relation between \code{RS1} and \code{RS2}.
+Each RNA feature is only mapped with a part of region on its transcript (picked by the \code{customPick_function}). The output \code{orig.ev} is the weighted counts between \code{RS1} and \code{RS2}. Each feature in \code{RS1} related to \code{n1} isoforms in \code{RS2} and overlapped with \code{n2} \code{RS2} regions will contribute a value of \code{n2/n1} to the total number of overlaps.
 This test function also randomizes input features per transcript. The set of randomized results is outputted as \code{RSL}. The overlapping counts between each set in  \code{RSL} with \code{RS2} is outputted as \code{rand.ev}.
 }
 \examples{

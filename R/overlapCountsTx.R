@@ -1,17 +1,17 @@
-#' Evaluation function.
+#' Evaluation function
 #' @export overlapCountsTx
 #' @importFrom IRanges countOverlaps
 #' @importFrom IRanges findOverlaps
 #'
-#' @description This function receives two region sets and returns the number of their overlappings.
+#' @description This function receives two region sets and returns the number of their overlaps.
 #'
 #' @usage overlapCountsTx(A, B, count_once = TRUE, over_trans = TRUE, ...)
 #'
 #' @param A Region set 1. A \code{GRangesList} object.
 #' @param B Region set 2. A \code{GRangesList} object.
 #' @param count_once Whether the overlap of multiple B regions with a single A region should be counted once or multiple times.
-#' @param over_trans Whether the overlapping is counted over transcriptome.
-#' @param ... any additional parameters needed
+#' @param over_trans Whether the overlapping is counted over the transcriptome or over the genome.
+#' @param ... Any additional parameters needed.
 #'
 #' @return A \code{numeric} object.
 #'
@@ -23,8 +23,8 @@
 #' trans.ids <- c("170", "782", "974", "1364", "1387")
 #' exons.tx0 <- exonsBy(txdb)
 #' regions.A <- exons.tx0[trans.ids]
-#' A <- randomizeTransByOrder(regions.A, random_length = 20)
-#' B <- randomizeTransByOrder(regions.A, random_length = 20)
+#' A <- randomizeTransByOrder(regions.A, random_length = 200)
+#' B <- randomizeTransByOrder(regions.A, random_length = 200)
 #'
 #' overlapCountsTx(A, B)
 overlapCountsTx <- function(A, B, count_once = TRUE, over_trans = TRUE, ...) {

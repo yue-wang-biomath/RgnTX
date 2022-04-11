@@ -4,18 +4,18 @@
 \alias{getPermSpaceByType}
 \title{Get permutation space by specifying type}
 \usage{
-getPermSpaceByType(txdb, type = 'mature')
+getPermSpaceByType(txdb, type = "mature")
 }
 \arguments{
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
-\item{type}{A character object. Default is 'mature'. It accepts options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which one can get corresponding types of regions over transcriptome.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 }
 \value{
 A \code{GRangesList} object.
 }
 \description{
-This function can return 5'UTR/CDS/3'UTR/mRNA/full transcripts grouped by transcript ids.
+This function can return 5'UTR/CDS/3'UTR/mRNA/full part of transcriptome regions, following the format required by the main permutation test functions.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

@@ -2,21 +2,24 @@
 % Please edit documentation in R/GRanges2GRangesList.R
 \name{GRanges2GRangesList}
 \alias{GRanges2GRangesList}
-\title{Convert a GRanges object to a GRangesList object.}
+\title{Convert a GRanges object to a GRangesList object}
 \usage{
 GRanges2GRangesList(A = NULL)
 }
 \arguments{
-\item{A}{Input \code{GRanges} object.}
+\item{A}{A \code{GRanges} object.}
 }
 \value{
 A \code{GRangesList} object.
 }
 \description{
-Convert a \code{GRanges} object to a \code{GRangesList} object.
+Convert a \code{GRanges} object to a \code{GRangesList} object. The output region set follows the format required by the main permutation test functions.
 }
 \details{
-Input \code{GRanges} object can have a metadata named as 'group'. Ranges with the same group will be assigned to the same list element.
+If input \code{GRanges} object has a metadata named as "group",
+ranges having the same group number is a region. If not, a range is a region.
+A region in the input set will be outputted as a list element IN returned
+\code{GRangesList} object.
 }
 \examples{
 library(GenomicRanges)

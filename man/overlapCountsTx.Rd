@@ -2,7 +2,7 @@
 % Please edit documentation in R/overlapCountsTx.R
 \name{overlapCountsTx}
 \alias{overlapCountsTx}
-\title{Evaluation function.}
+\title{Evaluation function}
 \usage{
 overlapCountsTx(A, B, count_once = TRUE, over_trans = TRUE, ...)
 }
@@ -13,15 +13,15 @@ overlapCountsTx(A, B, count_once = TRUE, over_trans = TRUE, ...)
 
 \item{count_once}{Whether the overlap of multiple B regions with a single A region should be counted once or multiple times.}
 
-\item{over_trans}{Whether the overlapping is counted over transcriptome.}
+\item{over_trans}{Whether the overlapping is counted over the transcriptome or over the genome.}
 
-\item{...}{any additional parameters needed}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{numeric} object.
 }
 \description{
-This function receives two region sets and returns the number of their overlappings.
+This function receives two region sets and returns the number of their overlaps.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
@@ -29,8 +29,8 @@ txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 trans.ids <- c("170", "782", "974", "1364", "1387")
 exons.tx0 <- exonsBy(txdb)
 regions.A <- exons.tx0[trans.ids]
-A <- randomizeTransByOrder(regions.A, random_length = 20)
-B <- randomizeTransByOrder(regions.A, random_length = 20)
+A <- randomizeTransByOrder(regions.A, random_length = 200)
+B <- randomizeTransByOrder(regions.A, random_length = 200)
 
 overlapCountsTx(A, B)
 }

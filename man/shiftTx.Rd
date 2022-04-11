@@ -2,26 +2,26 @@
 % Please edit documentation in R/shiftTx.R
 \name{shiftTx}
 \alias{shiftTx}
-\title{Shift over transcripts.}
+\title{Shift over transcripts}
 \usage{
 shiftTx(regions, start, width, direction, strand)
 }
 \arguments{
-\item{regions}{A feature set that follows the format indicated in vignette section 3. Either to be GRanges or GRangesList.}
+\item{regions}{A feature set following the format indicated in vignette section 3. Either to be \code{GRanges} or \code{GRangesList}.}
 
-\item{start}{A vector of starting positions, in which each value must be relative to each input feature.}
+\item{start}{Starting positions. Each value represents a starting position in each input feature.}
 
-\item{width}{A vector of integers, the width of each region to be picked from each feature.}
+\item{width}{Widths. Each value represents a width of each region to be picked from each feature.}
 
-\item{direction}{The direction of displacement. It has options 'left' and 'right'. 'left' means shifting to 5' while 'right' to 3'.}
+\item{direction}{Either to be character "left" or "right", which means the direction to which the starting position is shifting. The former means moving to the direction of 5' while the latter means moving to 3'.}
 
-\item{strand}{The strand type of the transcripts. It receives '+' or '-'.}
+\item{strand}{The strand type of the transcripts. It receives "+" or "-".}
 }
 \value{
-A Granges object.
+A \code{Granges} object.
 }
 \description{
-Calculate positional shift over transcript regions.
+Calculate positional shifting over transcript regions. This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
 }
 \examples{
 # Take five transcripts.
@@ -38,5 +38,6 @@ cds.p <- cds.tx0[trans.id.pstv]
 
 width <- 200
 start = as.numeric(max(end(cds.p)))
-R.cds.last200 <- shiftTx(cds.p, start = start, width = width, direction = 'left', strand = "+")
+R.cds.last200 <- shiftTx(cds.p, start = start, width = width,
+direction = 'left', strand = "+")
 }

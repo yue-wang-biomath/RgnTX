@@ -8,19 +8,19 @@ randomizeTx(txdb, trans_ids = 'all',
 random_num = 100, random_length = 20, type = 'mature', N = 1, ...)
 }
 \arguments{
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
 \item{trans_ids}{The ids of transcripts, which should be a character object. Random regions will be picked from these transcripts. If this argument takes the default value 'all', the scope of picking random regions will be the whole transcriptome.}
 
-\item{random_num}{The number of regions being picked.}
+\item{random_num}{The number of regions to be picked.}
 
-\item{random_length}{The length of regions being picked.}
+\item{random_length}{The length of regions to be picked.}
 
-\item{type}{This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which user can get corresponding types of transcriptome regions.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 
 \item{N}{Randomization times.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{GRangesList} object. The name of each element is the id of the transcript where the corresponding range is located.

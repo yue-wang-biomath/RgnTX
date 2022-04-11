@@ -2,20 +2,20 @@
 % Please edit documentation in R/randomizeFeaturesTxIA.R
 \name{randomizeFeaturesTxIA}
 \alias{randomizeFeaturesTxIA}
-\title{Randomize features into transcriptome.}
+\title{Randomize features into transcriptome}
 \usage{
-randomizeFeaturesTxIA(RS, txdb, type = 'mature', N = 1, ...)
+randomizeFeaturesTxIA(RS, txdb, type = "mature", N = 1, ...)
 }
 \arguments{
-\item{RS}{The feature being randomized. It should be a GRanges or GRangesList object.}
+\item{RS}{The feature being randomized. It should be a \code{GRanges} or \code{GRangesList} object.}
 
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
-\item{type}{This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which user can get corresponding types of transcriptome regions.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 
 \item{N}{Randomization times.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{GRangesList} object. The name of each element is the id of the transcript where the corresponding range is located.

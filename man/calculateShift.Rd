@@ -4,22 +4,23 @@
 \alias{calculateShift}
 \title{Calculate positional shifting over transcriptome}
 \usage{
-calculateShift(regions, disp, direction = 'right', strand = '+')
+calculateShift(regions, disp, direction = "right", strand = "+")
 }
 \arguments{
-\item{regions}{The region space where the displacement is calculated, which should be a GRangesList object.}
+\item{regions}{A feature set, which should be a GRangesList object.}
 
-\item{disp}{The region space where the displacement is calculated, which should be a GRangesList object.}
+\item{disp}{A data frame object. It should have three columns, which are \code{start}: starting positions. Each value represents a starting position in each input feature;
+\code{width}: widths. Each value represents a width of each region to be picked from each feature; \code{names}: corresponding transcript ids.}
 
-\item{direction}{The direction of displacement. It has options 'left' and 'right'.}
+\item{direction}{Either to be character "left" or "right", which means the direction to which the starting position is shifting. The former means moving to the direction of 5' while the latter means moving to 3'.}
 
-\item{strand}{The strand type of the transcripts. It receives '+' or '-'.}
+\item{strand}{Either to be "+" or "-".}
 }
 \value{
 A \code{GRanges} object.
 }
 \description{
-This function can calculate shifting over 'disconnected' regions. For example, due to alternative splicing, an mRNA is represented by several disconnected regions according to the annotation information. And this function can calculate position displacement over such disconnected regions. It can automatically skip the 'blank' between the regions when calculating position shifting.
+The first step of calculating positional shift over transcriptome regions.
 }
 \examples{
 # Take five transcripts.

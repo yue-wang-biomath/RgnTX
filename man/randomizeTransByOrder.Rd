@@ -2,7 +2,7 @@
 % Please edit documentation in R/randomizeTransByOrder.R
 \name{randomizeTransByOrder}
 \alias{randomizeTransByOrder}
-\title{randomize transcriptome regions according to input order.}
+\title{Randomize features into transcriptome}
 \usage{
 randomizeTransByOrder(regions_A, random_length = 20)
 }
@@ -15,7 +15,7 @@ randomizeTransByOrder(regions_A, random_length = 20)
 A \code{GRangesList} object. The name of each list element should be the corresponding transcript id.
 }
 \description{
-This function receives a \code{GRangesList} object and picks a random region within each list element of this object. The length of the region being picked is decided by the input random.length argument.
+This function receives a \code{GRangesList} object and picks a random region within each list element of this object. The length of the region to be picked is decided by the input \code{random_length} argument.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

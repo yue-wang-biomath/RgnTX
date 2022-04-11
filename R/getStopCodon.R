@@ -4,9 +4,9 @@
 #'
 #' @usage getStopCodon(trans_ids, txdb, ...)
 #'
-#' @param trans_ids A character object of transcript ids.
+#' @param trans_ids A character object containing transcript ids.
 #' @param txdb A TxDb object.
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
 #' @return A \code{numeric} object.
 #'

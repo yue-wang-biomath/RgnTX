@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotShiftedZScoreTx.R
 \name{plotShiftedZScoreTx}
 \alias{plotShiftedZScoreTx}
-\title{Calculate shifted z scores.}
+\title{Plot shifted z scores}
 \usage{
 plotShiftedZScoreTx(shitedZScoresTx_results)
 }
@@ -10,10 +10,10 @@ plotShiftedZScoreTx(shitedZScoresTx_results)
 \item{shitedZScoresTx_results}{A \code{shitedZScoreTx.results} object.}
 }
 \value{
-A plot object.
+A plot.
 }
 \description{
-Calculate shifted z scores for permutation test results.
+Plot shifted z scores for permutation test results.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

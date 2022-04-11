@@ -2,7 +2,7 @@
 % Please edit documentation in R/shiftedZScoreTx.R
 \name{shiftedZScoreTx}
 \alias{shiftedZScoreTx}
-\title{Calculate shifted z scores.}
+\title{Calculate shifted z scores}
 \usage{
 shiftedZScoreTx(permTestTx_results = NULL, txdb = NULL,
 window = 200, step = 20, ev_function_1 = overlapCountsTx, ...)
@@ -16,17 +16,17 @@ window = 200, step = 20, ev_function_1 = overlapCountsTx, ...)
 
 \item{step}{The step of each shifting.}
 
-\item{ev_function_1}{Evaluation function. Default is overlapCountsTx function provided by the \code{RgnTX}. Users can input a custom evaluation function via this argument.}
+\item{ev_function_1}{Evaluation function. Default is \code{overlapCountsTx}.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
-A list object, which is defined to be \code{shitedZScore.results} class. It contains the following information:
+A list object, which is defined to be \code{shitedZScore.results} class. It contains the following items:
 \itemize{
-\item \bold{\code{shifted.z.scores}} Standard z-scores after shiftting.
-\item \bold{\code{window}} The window of the whole shifting.
-\item \bold{\code{step}} The step of each shifting.
-\item \bold{\code{original.z.score}} The original standard score.
+\item \bold{\code{shifted.z.scores:}} Standard z-scores after shifting.
+\item \bold{\code{window:}} Window of the whole shifting.
+\item \bold{\code{step:}} Step of each shifting.
+\item \bold{\code{original.z.score:}} Original standard score.
 }
 }
 \description{

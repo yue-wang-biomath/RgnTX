@@ -2,20 +2,20 @@
 % Please edit documentation in R/randomizeFeaturesTx.R
 \name{randomizeFeaturesTx}
 \alias{randomizeFeaturesTx}
-\title{Randomize features into transcriptome.}
+\title{Randomize features into transcriptome}
 \usage{
-randomizeFeaturesTx(RS, txdb, type = 'mature', N = 1, ...)
+randomizeFeaturesTx(RS, txdb, type = "mature", N = 1, ...)
 }
 \arguments{
-\item{RS}{The feature being randomized. It should be a GRanges or GRangesList object.}
+\item{RS}{The feature to be randomized. It should be a \code{GRanges} or \code{GRangesList} object.}
 
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
-\item{type}{This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which user can get corresponding types of transcriptome regions.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 
 \item{N}{The number of iterations.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{GRangesList} object. The name of each element is the id of the transcript where the corresponding range is located.
@@ -27,7 +27,7 @@ Randomize features into transcriptome.
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 trans.ids <- c("170", "782", "974", "1364", "1387")
-RS1 <- randomizeTx(txdb, trans.ids, random.num = 100, random.length = 100)
+RS1 <- randomizeTx(txdb, trans.ids, random_num = 100, random_length = 100)
 RS <- randomizeFeaturesTx(RS1, txdb, N = 1)
 }
 \seealso{

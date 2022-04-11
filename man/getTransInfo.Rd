@@ -7,24 +7,24 @@
 getTransInfo(A, txdb)
 }
 \arguments{
-\item{A}{Genomic features, which should be a GRanges object.}
+\item{A}{Genomic feature set, which should be a \code{GRanges} object.}
 
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 }
 \value{
 A \code{data.frame} object containing the following components:
 \itemize{
-\item \bold{\code{index_trans}} The label of transcripts.
-\item \bold{\code{index_features}} The label of genomic features.
-\item \bold{\code{seqnames}} The Chr name.
-\item \bold{\code{features_pos}} The coordinate of genomic features.
-\item \bold{\code{width_features}} The width of genomic features.
-\item \bold{\code{strand}} The strand of genomic features.
-\item \bold{\code{trans_ID}} The id of the transcript that this feature may come from.
+\item \bold{\code{index_trans:}} The label of transcripts.
+\item \bold{\code{index_features:}} The label of genomic features.
+\item \bold{\code{seqnames:}} The chr name.
+\item \bold{\code{features_pos:}} The starting coordinate of each genomic feature.
+\item \bold{\code{width_features:}} The width of each genomic feature.
+\item \bold{\code{strand:}} The strand type of each genomic feature.
+\item \bold{\code{trans_ID:}} The ids of the transcripts that each feature can be mapped to.
 }
 }
 \description{
-Generate a data frame object that contains information about input genomic features and its mapping results over the transcriptome.
+Generate a data frame object that contains information about input genomic feature set and its mapping results over the transcriptome.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

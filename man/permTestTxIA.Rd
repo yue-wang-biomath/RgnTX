@@ -2,7 +2,7 @@
 % Please edit documentation in R/permTestTxIA.R
 \name{permTestTxIA}
 \alias{permTestTxIA}
-\title{Perform permutation test.}
+\title{Perform permutation test}
 \usage{
 permTestTxIA(RS1 = NULL,
                     RS2 = NULL,
@@ -19,30 +19,28 @@ permTestTxIA(RS1 = NULL,
 
 \item{RS2}{The region set to be compared with. It should be in the \code{GRanges} or \code{GRangesList} format.}
 
-\item{txdb}{A txdb object.}
+\item{txdb}{A TxDb object.}
 
-\item{type}{This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR'. It decides which types of space that the features being randomized into.}
+\item{type}{A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.}
 
 \item{ntimes}{Randomization times.}
 
-\item{ev_function_1}{Evaluation function defines what statistic to be tested between RS1 and RS2. Default is overlapCountsTx.}
+\item{ev_function_1}{Evaluation function defines what statistic to be tested between \code{RS1} and \code{RS2}. Default is \code{overlapCountsTx}.}
 
-\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is overlapCountsTx.}
+\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in \code{RSL} and \code{RS2}. Default is \code{overlapCountsTx}.}
 
 \item{pval_z}{Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A list object, which is defined to be \code{permTestTx.results} class. It contains the following items:
 \itemize{
-\item \bold{\code{RSL}} Randomized region sets of \code{RS1}.
-\item \bold{\code{RS1}}
-\item \bold{\code{RS2}}
-\item \bold{\code{orig.ev}} The value of the test statistic between RS1 and RS2.
-\item \bold{\code{rand.ev}} The values of the test statistic between each element in RSL and RS2.
-\item \bold{\code{pval}} The p-value of the test.
-\item \bold{\code{zscore}} The standard score of the test.
+\item \bold{\code{RSL:}} Randomized region sets of \code{RS1}.
+\item \bold{\code{orig.ev:}} The value of the test statistic between \code{RS1} and \code{RS2}.
+\item \bold{\code{rand.ev:}} The values of the test statistic between each element in \code{RSL} and \code{RS2}.
+\item \bold{\code{pval:}} p-value of the test.
+\item \bold{\code{zscore:}} Standard score of the test.
 }
 }
 \description{

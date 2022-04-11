@@ -6,13 +6,13 @@
 #' @usage randomizeTx(txdb, trans_ids = 'all',
 #' random_num = 100, random_length = 20, type = 'mature', N = 1, ...)
 #'
-#' @param txdb A txdb object.
+#' @param txdb A TxDb object.
 #' @param trans_ids The ids of transcripts, which should be a character object. Random regions will be picked from these transcripts. If this argument takes the default value 'all', the scope of picking random regions will be the whole transcriptome.
-#' @param random_num The number of regions being picked.
-#' @param random_length The length of regions being picked.
-#' @param type This argument receives options 'mature', 'full', 'fiveUTR', 'CDS' or 'threeUTR', with which user can get corresponding types of transcriptome regions.
+#' @param random_num The number of regions to be picked.
+#' @param random_length The length of regions to be picked.
+#' @param type A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.
 #' @param N Randomization times.
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
 #' @return A \code{GRangesList} object. The name of each element is the id of the transcript where the corresponding range is located.
 #'

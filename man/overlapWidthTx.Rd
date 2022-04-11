@@ -2,7 +2,7 @@
 % Please edit documentation in R/overlapWidthTx.R
 \name{overlapWidthTx}
 \alias{overlapWidthTx}
-\title{Evaluation function.}
+\title{Evaluation function}
 \usage{
 overlapWidthTx(A, B, ...)
 }
@@ -11,13 +11,13 @@ overlapWidthTx(A, B, ...)
 
 \item{B}{Region set 2. A \code{Granges} or \code{GRangesList} object.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{numeric} object.
 }
 \description{
-Evaluation function. This function returns the sum of overlapping width between two region sets.
+Evaluation function. This function returns the sum of widths of each overlap between two region sets,  i.e., the total number of overlapping nucleotides between two input region sets.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

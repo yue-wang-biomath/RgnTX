@@ -1,9 +1,9 @@
-#' randomize transcriptome regions according to input order.
+#' Randomize features into transcriptome
 #'
 #' @export randomizeTransByOrder
 #' @importFrom stats runif
 #'
-#' @description This function receives a \code{GRangesList} object and picks a random region within each list element of this object. The length of the region being picked is decided by the input random.length argument.
+#' @description This function receives a \code{GRangesList} object and picks a random region within each list element of this object. The length of the region to be picked is decided by the input \code{random_length} argument.
 #' @usage randomizeTransByOrder(regions_A, random_length = 20)
 #'
 #' @param regions_A A \code{GRangesList} object. The name of each list element should be the corresponding transcript id.

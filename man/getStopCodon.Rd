@@ -7,11 +7,11 @@
 getStopCodon(trans_ids, txdb, ...)
 }
 \arguments{
-\item{trans_ids}{A character object of transcript ids.}
+\item{trans_ids}{A character object containing transcript ids.}
 
 \item{txdb}{A TxDb object.}
 
-\item{...}{any additional parameters needed.}
+\item{...}{Any additional parameters needed.}
 }
 \value{
 A \code{numeric} object.

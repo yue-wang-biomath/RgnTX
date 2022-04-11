@@ -1,13 +1,13 @@
-#' Extract regions.
+#' Extract regions
 #' @export extractRegions
 #'
-#' @description This function receives three arguments: the scope region, the target region and the type of strand. It returns a subset of target region, which is the intersection of the target region and the scope region.
+#' @description This function receives three arguments: the scope region set, the target region set and the type of strand. It returns a subset of target region set, which is the intersection of the target region set and the scope region set.
 #'
-#' @usage extractRegions(regions_A, R, strand = '+')
+#' @usage extractRegions(regions_A, R, strand = "+")
 #'
-#' @param regions_A The scope region. A \code{GRangesList} object. The name of each list element should be the transcript id that it pertains to.
-#' @param R The target region. A GRanges object.
-#' @param strand The strand type of the transcripts. It has options '+' and '-'.
+#' @param regions_A The scope region set. A \code{GRangesList} object. The name of each list element should be the transcript id that it pertains to.
+#' @param R The target region set. A \code{GRanges} object.
+#' @param strand The strand type of the transcripts. It has options "+" and "-".
 #'
 #' @return A \code{GRangesList} object.
 #'

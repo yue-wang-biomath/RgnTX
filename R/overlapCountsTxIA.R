@@ -1,19 +1,19 @@
-#' Evaluation function.
+#' Evaluation function
 #' @export overlapCountsTxIA
 #' @importFrom IRanges countOverlaps
 #' @importFrom IRanges findOverlaps
 #'
-#' @description Evaluation function. This function receives a DNA features and a transcriptome region set, and returns a weighted overlapping counts between them.
+#' @description Evaluation function. This function receives a feature set (with isoform ambiguity) and a transcriptome region set (without isoform ambiguity), and returns a weighted number of overlaps between them.
 #'
 #' @usage overlapCountsTxIA(A, B, ...)
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
-#' @param A A DNA features.
-#' @param B A \code{GRangesList} object.
+#' @param A A feature set, which should be \code{GRanges}.
+#' @param B A region set, which should be \code{GRangesList}.
 #'
 #' @return A \code{numeric} object.
 #'
-#' @seealso \code{\link{overlapWidthTx}}, \code{\link{distanceTx}}
+#' @seealso \code{\link{overlapWidthTx}}, \code{\link{distanceTx}}, \code{\link{overlapCountsTx}}
 #'
 #' @examples
 #' library(TxDb.Hsapiens.UCSC.hg19.knownGene)

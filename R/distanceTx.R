@@ -1,6 +1,6 @@
-#' Evaluation function.
+#' Evaluation function
 #' @export distanceTx
-#' @importFrom IRanges distanceToNearest
+#' @importFrom IRanges distanceToNearest shift
 #' @importFrom methods is
 #'
 #' @description Evaluation function. This function calculates the mean of the distance from each region of set RS1 to the closest region in RS2.
@@ -10,7 +10,7 @@
 #' @param A Region set 1. A Granges or GRangesList object.
 #' @param B Region set 2. A Granges or GRangesList object.
 #' @param beta It is a user-defined argument that can filter out the corresponding percent of largest distance values. Default value is 0.2.
-#' @param ... any additional parameters needed.
+#' @param ... Any additional parameters needed.
 #'
 #' @return A \code{numeric} object.
 #'
