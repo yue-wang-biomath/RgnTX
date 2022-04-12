@@ -9,7 +9,7 @@
 #' @param A A \code{GRanges} object.
 #'
 #' @details If input \code{GRanges} object has a metadata named as "group",
-#' ranges having the same group number is a region. If not, a range is a region.
+#' ranges having the same group number represent a region. If not, a range is a region.
 #' A region in the input set will be outputted as a list element IN returned
 #' \code{GRangesList} object.
 #'
