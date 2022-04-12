@@ -310,7 +310,7 @@ This is the most basic strategy. It requires users to input a feature set (to be
 
 ### permTestTx function
 
-The `permTestTx` function is for features without isoform ambiguity. As an example, we generate two region sets A and B. As shown below, by our design they have at least 25 overlaps. We feed them into `permTestTx`.
+The `permTestTx` function is for features without isoform ambiguity. As an example, we generate two region sets A and B. As shown below, by our design they have at least 50 overlaps. We feed them into `permTestTx`.
 
 ```{r, message=FALSE, warning=FALSE}
 set.seed(12345677)
