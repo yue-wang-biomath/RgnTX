@@ -88,9 +88,9 @@ In this simulation, we randomly generated 1000 pairs of region sets in the follo
 
 * **mRNA**: It contains all of the mRNAs that pertain to the previously picked genes.
 
-* **Exonic DNA**: This space involves only the part of genome that is related to the previously picked mRNAs, i.e., the linear space of mRNAs.
+* **Exonic DNA**: This space involves only the part of genome that is related to the previously picked mRNAs. It is actually a linear space of these mRNAs.
 
-Figure \@ref(fig:Fig4) shows the evaluation results. In the first four cases, overlaps are counted based on the genome (or after projection). In the last case, overlaps are counted in the transcriptome directly. The former is evaluated by `r BiocStyle::Biocpkg("regioneR")` function `numOverlaps`, the last is evaluated by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `overlapCountsTx`.
+Figure \@ref(fig:Fig4) shows the evaluation results. In the first four cases, overlaps are counted based on the genome (or after projection). In the last case, overlaps are counted in the transcriptome directly. The former four cases are evaluated by `r BiocStyle::Biocpkg("regioneR")` function `numOverlaps`, the last is evaluated by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `overlapCountsTx`.
 
 ```{r  Fig4, fig.cap = "Overlapping counts between random region sets in different permutation spaces. Box boundaries represent the 25th and 75th percentiles; center line represents the median.", echo=FALSE, out.width='.80\\linewidth'}
 knitr::include_graphics("figures/section2.4.png")
@@ -112,7 +112,7 @@ A TxDb object provides default ids and names for transcripts. According to `r Bi
 
 Please pay attention not to confuse the transcript ids with other types of ids, such as ids for CDS, exons and other genomic features provided by a TxDb object, or external ids for genes like Entrez Gene and Ensembl ids. Functions in [RgnTX](https://github.com/yue-wang-biomath/RgnTX) will not work with wrong types of ids.    
 	
-* **Input feature set should be either Granges or GRangesList**
+* **Input feature set should be either GRanges or GRangesList**
 
 The feature/region sets in [RgnTX](https://github.com/yue-wang-biomath/RgnTX) should be either `Granges` or `GRangesList`.  
 
@@ -131,7 +131,7 @@ example.list <- randomizeTx(txdb, random_num = 10, random_length = 200)
 example.list
 ```
 
-The following `GRanges` object represents the same set as the above one. Ranges having the same group mumber represent a feature. The `transcriptsHits` column contains corresponding transcript ids. Both formats are accepted by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) functions and can be transformed to each other via function `GRangesList2GRanges` and function `GRanges2GRangesList`.
+The following `GRanges` object represents the same region set as the above one. Ranges having the same group number represent a feature. The `transcriptsHits` column contains corresponding transcript ids. Both formats are accepted by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) functions and can be transformed to each other via function `GRangesList2GRanges` and function `GRanges2GRangesList`.
 
 ```{r, message=FALSE, warning=FALSE}
 example.gr <- GRangesList2GRanges(example.list)
