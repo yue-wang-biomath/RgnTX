@@ -49,7 +49,7 @@ Currently, colocalization analysis of two genomic region sets has been widely us
 
 ## What does a permutation test do?
 
-Suppose we want to know if a region set A has some association with another region set B. We could pick some random region sets, and calculate the number of overlaps between them and B. If the overlap number of these random region sets and B are generally smaller than that of A and B, it is more likely to say there exists some association between A and B, otherwise not. 
+Suppose we want to know if a region set A has some association with another region set B. We could pick some random region sets, and calculate the number of overlaps between them and B. If the overlap numbers of these random region sets and B are generally smaller than that of A and B, it is more likely to say there exists some association between A and B, otherwise not. 
 
 Such permutation test framework mainly involves two steps: the randomization step (picking random region sets) and the evaluation step (evaluating overlapping counts or other test statistic). Importantly, performing it over the transcriptome and the genome can be different in both of these two steps. 
 
@@ -90,7 +90,7 @@ In this simulation, we randomly generated 1000 pairs of region sets in the follo
 
 * **Exonic DNA**: This space involves only the part of genome that is related to the previously picked mRNAs. It is actually a linear space of these mRNAs.
 
-Figure \@ref(fig:Fig4) shows the evaluation results. In the first four cases, overlaps are counted based on the genome (or after projection). In the last case, overlaps are counted in the transcriptome directly. The former four cases are evaluated by `r BiocStyle::Biocpkg("regioneR")` function `numOverlaps`, the last is evaluated by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `overlapCountsTx`.
+Figure \@ref(fig:Fig4) shows the evaluation results. In the first four cases, overlaps are counted based on the genome (or after projection). In the last case, overlaps are counted in the transcriptome directly. The former four cases are evaluated by `r BiocStyle::Biocpkg("regioneR")` function `numOverlaps`, while the last is evaluated by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `overlapCountsTx`.
 
 ```{r  Fig4, fig.cap = "Overlapping counts between random region sets in different permutation spaces. Box boundaries represent the 25th and 75th percentiles; center line represents the median.", echo=FALSE, out.width='.80\\linewidth'}
 knitr::include_graphics("figures/section2.4.png")
@@ -104,7 +104,7 @@ As the results show, permutations over different genome and transcriptome space 
 
 * **TxDb object used in RgnTX** 
 
-A TxDb object stores transcripts, exons, CDS and other types of genomic features. A TxDb object is usually required by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) functions. Currently, all the examples in this vignette are based on the `TxDb.Hsapiens.UCSC.hg19.knownGene`. Users can assign other TxDb objects via the function arguments.
+A TxDb object stores transcripts, exons, CDS and other types of genomic features. A TxDb object is usually required by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) functions. Currently, all the examples in this vignette are based on the `TxDb.Hsapiens.UCSC.hg19.knownGene`. Users can assign other TxDb objects via related function arguments.
 
 * **Transcript ids and names**
 
@@ -114,7 +114,7 @@ Please pay attention not to confuse the transcript ids with other types of ids, 
 	
 * **Input feature set should be either GRanges or GRangesList**
 
-The feature/region sets in [RgnTX](https://github.com/yue-wang-biomath/RgnTX) should be either `Granges` or `GRangesList`.  
+The feature/region sets in [RgnTX](https://github.com/yue-wang-biomath/RgnTX) should be either `GRanges` or `GRangesList`.  
 
 For a `GRangesList` feature set, every list element that contains a set of ranges is a feature. For a `GRanges` feature set without special instructions, a single range is a feature. For a `GRanges` feature set containing a metadata column named "group", the set of ranges having the same group number is a feature. 
 
@@ -149,7 +149,7 @@ In this strategy, users need to specify a scope that random region sets will be 
 
 ### randomizeTx function
 
-In this function, users can pass transcript ids as an argument to make random regions to be picked from the transcripts having these ids.   
+In this function, users can pass transcript ids via an argument to make random regions to be picked from the transcripts having these ids.   
 
 **Step 1: specify a randomization space**
 
@@ -164,7 +164,7 @@ We feed them into the `randomizeTX` function.
 
 **Step 2: randomizeTx function**
 
-We use this function to pick 10 random regions, and each region is 100 nt long. Each region is picked from a random transcript specified by the input transcript ids.
+We use this function to pick 10 random regions, and each region is 100 nt long. Each region is picked from a random transcript among the input transcripts.
 ```{r, warning=FALSE, message=FALSE}
 set.seed(12345677)
 randomResults <- randomizeTx(txdb, trans_ids = trans.ids, random_num = 10,
@@ -195,7 +195,7 @@ The function returns a `GRangesList` object. Every list element has a total leng
 
 ### randomizeTransByOrder function
 
-This is another randomization function. The difference of this function and `randomizeTx` is that it does not take a set of transcript ids as an argument, instead, it takes a `GRangesList` region set and picks only one random region within the space indicated by every `GRangesList` element. So the number of regions in a set this function returns is equal to the number of elements in the input `GRangesList` object.
+This is another randomization function. The difference of this function and `randomizeTx` is that it does not take an argument about transcript ids, instead, it takes a `GRangesList` region set and picks only one random region within the space indicated by every `GRangesList` element. So the number of regions in a set this function returns is equal to the number of elements in the input `GRangesList` object.
    
 **Step 1: specify a randomization space**
 
@@ -228,7 +228,7 @@ Functions introduced in this section support randomizing two kinds of RNA-relate
 
 * **Features without isoform ambiguity**: for features without isoform ambiguity, it is clear which specific isoform each feature is located on (See Figure \@ref(fig:Fig5)). Each feature will be randomized within its relative transcript.
 
-* **Features with isoform ambiguity**: the isoform specificity of transcriptome elements is unclear to us because each of them overlaps with multiple isoforms when mapped to the genome (See Figure \@ref(fig:Fig6)). Each feature will be randomized into the set of its relative isoform transcripts.
+* **Features with isoform ambiguity**: the isoform specificity of transcriptome elements is unclear to us because each of them overlaps with multiple isoforms when mapped to the genome (See Figure \@ref(fig:Fig6)). Each feature will be randomized into the set of isoform transcripts it is associated with.
 
 ```{r  Fig5, fig.cap = "Features without isoform ambiguity.", echo=FALSE, out.width='.80\\linewidth'}
 knitr::include_graphics("figures/section4.1.png")
@@ -433,7 +433,7 @@ This function receives a feature set (with isoform ambiguity) and a customPick f
 
 Let’s take an example about testing association between N$^6$-Methyladenosine and the stop codon regions. The m$^6$A sites are derived from an miCLIP-seq dataset (Linder, et al., 2015). Due to technical restriction, it is not clear which specific transcript an m$^6$A feature is located on. 
 
-To test this association, we wrote a customPick function `getStopCodon` picking the stop codon regions of transcripts. It actually picks the last 100 nt of CDS and the first 100 nt of 3'UTR of transcripts given transcript ids. If a given transcript's CDS or 3'UTR part is less than 100 nt, the function will just pick this less than 100 nt region. This function actually uses the function `shiftTx`this in section [9](#other-useful-functions) provided by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) to realize these tasks.
+To test this association, we wrote a customPick function `getStopCodon` picking the stop codon regions of transcripts. It actually picks the last 100 nt of CDS and the first 100 nt of 3'UTR of transcripts given transcript ids. If a given transcript's CDS or 3'UTR part is less than 100 nt, the function will just pick this less than 100 nt region. This function actually uses the function `shiftTx` in section [9](#other-useful-functions) provided by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) to realize these tasks.
 
 As a quick example, we feed 500 out of 9181 m$^6$A sites and this `getStopCodon` function into function `permTestTxIA_customPick`. Its default evaluation function calculates a weighted overlapping number between m$^6$A sites and the stop codon regions.
 
@@ -470,7 +470,7 @@ p_b
 knitr::include_graphics("figures/section5.5.png")
 ```
 
-The weighted number of overlaps between 9181 m$^6$A sites and stop codon regions is 804.93 (calculated by default evaluation function in [6.3](#overlapcountstxia-function)), while the mean of random evaluations is 365.28 (calculated by default evaluation function in [6.2](#overlapcountstx-function)). The low p-value shows that the association being tested is statistically significant. 
+The weighted number of overlaps between 9181 m$^6$A sites and stop codon regions is 804.93 (calculated by default evaluation function in [6.2](#overlapcountstxia-function)), while the mean of random evaluations is 365.28 (calculated by default evaluation function in [6.1](#overlapcountstx-function)). The low p-value shows that the association being tested is statistically significant. 
 
 **References**:
 Linder, B., et al. (2015) Single-nucleotide-resolution mapping of m$^6$A and m$^6$Am throughout the transcriptome. *Nat Methods*
@@ -482,7 +482,7 @@ Linder, B., et al. (2015) Single-nucleotide-resolution mapping of m$^6$A and m$^
 
 `permTestTx_customAll` needs users to provide at least three arguments: two region sets and a list of randomized region sets. 
 
-We take an easy example to explain how this function should be used. We want to test the association between two region sets come from the same transcript. We pick two region sets RS1 and RS2 in a transcript that has the id '170', and pick random region sets within a larger space containing 5 transcripts.
+We take an easy example to explain how this function should be used. We want to test the association between two region sets come from the same transcript. We pick two region sets RS1 and RS2 in a transcript that has the id "170", and pick random region sets within a larger space containing 5 transcripts.
 
 ```{r, warning=FALSE, message=FALSE}
 set.seed(12345677)
@@ -539,7 +539,7 @@ In this section, we present some examples to show how different parameter settin
 
 * **alpha**: `alpha` is the significance level of a hypothesis testing. In Fig. \@ref(fig:Fig13) (c) and (d) we specify it to be 0.025 and 0.1, which respectively leads to a stricter and a looser test compared to the default test (0.05).
 
-* **Evaluation function**: The default evaluation statistic of ` permTestTx ` is the number of overlaps. In Fig. \@ref(fig:Fig13) (e) and (f) we try different evaluation statistics: the overlapping width and the mean of distances (with beta = 0.2) respectively.
+* **Evaluation function**: The default evaluation statistic of ` permTestTx ` is the number of overlaps. In Fig. \@ref(fig:Fig13) (e) and (f) we try different evaluation statistics: the overlapping width and the mean of distances (with beta = 0.3) respectively.
 
 * **Randomization times**: We increase the permutation times to 500 and 2000 in Fig. \@ref(fig:Fig13) (g) and (h). A larger number of permutations leads to more accurate results but also can be more computationally expensive. For a permutation test, the randomization function takes the most proportion of the time and resources. In section [10](#performance-of-randomization-function), we discuss the efficiency of [RgnTX](https://github.com/yue-wang-biomath/RgnTX) randomization functions. 
 
@@ -650,7 +650,7 @@ p1
 
 We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m$^6$A features. 
 
-Fig. \@ref(fig:Fig15) shows the scenario if we move the features within a smaller window. To see how a smaller position shift applied to features would affect the z-scores, we set smaller values for the `window` and `step` arguments. 
+Fig. \@ref(fig:Fig15) shows the scenario if we move the features within a smaller window. To see how a smaller position shift applied to features affects the z-scores, we set smaller values for the `window` and `step` arguments. 
 
 ```{r Fig15, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 300 and step 10."}
 set.seed(12345677)
