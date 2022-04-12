@@ -19,9 +19,9 @@ pval_z = FALSE, ...)
 
 \item{ntimes}{Randomization times.}
 
-\item{ev_function_1}{Evaluation function defines what statistic to be tested between RS1 and RS2. Default is \code{overlapCountsTx}.}
+\item{ev_function_1}{Evaluation function defines what statistic to be tested between \code{RS1} and \code{RS2}. Default is \code{overlapCountsTx}.}
 
-\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is \code{overlapCountsTx}.}
+\item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in \code{RSL} and \code{RS2}. Default is \code{overlapCountsTx}.}
 
 \item{pval_z}{Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.}
 

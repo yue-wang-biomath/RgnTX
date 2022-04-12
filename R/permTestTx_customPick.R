@@ -10,10 +10,10 @@
 #' @param RS1 The feature set to be randomized. It should be in the \code{GRanges} or \code{GRangesList} format.
 #' @param txdb A TxDb object.
 #' @param type A character object. Default is "mature". It accepts options "mature", "full", "fiveUTR", "CDS" or "threeUTR", with which one can get corresponding types of transcriptome regions.
-#' @param customPick_function A custom function needs to be inputted by users. The custom function should have two arguments: a txdb object and a character object of transcript ids. It returns a part of region of each transcript.
+#' @param customPick_function A custom function needs to be inputted by users. The custom function should have two arguments: a TxDb object and a character object of transcript ids. It returns a part of region of each transcript.
 #' @param ntimes Randomization times.
-#' @param ev_function_1 Evaluation function defines what statistic to be tested between RS1 and RS2. Default is \code{overlapCountsTx}.
-#' @param ev_function_2 Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is \code{overlapCountsTx}.
+#' @param ev_function_1 Evaluation function defines what statistic to be tested between \code{RS1} and \code{RS2}. Default is \code{overlapCountsTx}.
+#' @param ev_function_2 Evaluation function defines what statistic to be tested between each element in \code{RSL} and \code{RS2}. Default is \code{overlapCountsTx}.
 #' @param pval_z Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.
 #' @param ... Any additional parameters needed.
 #'
