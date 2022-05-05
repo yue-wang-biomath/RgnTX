@@ -1,6 +1,6 @@
 Package: RgnTX
 Title: Colocalization analysis of transcriptome elements in the presence of isoform heterogeneity and ambiguity
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: c(
     person("Yue", "Wang", , "m18896977776@163.com", role = c("aut", "cre")),
     person("Jia", "Meng", , "jia.meng@xjtlu.edu.cn", role = c("aut")))
