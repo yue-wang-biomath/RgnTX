@@ -1,5 +1,5 @@
 ---
-title: 'RgnTX: Colocalization analysis of transcriptome elements in the presence of isoform heterogeneity and ambiguity'
+title: 'RgnTX: colocalization analysis of transcriptome elements in the presence of isoform heterogeneity and ambiguity'
 author: 
 - name: Yue Wang
   affiliation:
