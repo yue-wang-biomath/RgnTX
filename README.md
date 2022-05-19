@@ -14,7 +14,6 @@ if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("RgnTX")
-
 ```
 
 To view the documentation of RgnTX, type `browseVignettes("RgnTX")` after installation.
