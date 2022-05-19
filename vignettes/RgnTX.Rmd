@@ -13,6 +13,8 @@ author:
   email: Jia.Meng@xjtlu.edu.cn
    
 date: "`r Sys.Date()`"
+abstract: This vignette describes the Bioconductor RgnTX package. We developed it for the colocalization analysis of transcriptome elements, where permutation test is performed to statistically estimate association between transcriptome region sets. RgnTX allows restriction of user-defined transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
+
 output:
    BiocStyle::html_document:
     toc: true
@@ -44,6 +46,23 @@ Currently, colocalization analysis of two genomic region sets has been widely us
 
 
 [RgnTX](https://github.com/yue-wang-biomath/RgnTX) makes a useful tool for transcriptome region set association analysis. In this vignette, with some simulated datasets, we show that permutation tests conducted in the genome and the transcriptome are significantly different and may return distinct results in section [2](#what-is-the-difference-between-permutation-tests-in-the-genome-and-the-transcriptome). The most core functions for conducting permutation tests and examples with real datasets are introduced in section [5](#permutation-test-function).
+
+To install this package via devtools, please use the following codes.
+```{r, eval = FALSE}
+if (!requireNamespace("devtools", quietly = TRUE))
+    install.packages("devtools")
+
+devtools::install_github("yue-wang-biomath/RgnTX", build_vignettes = TRUE)
+```
+
+To install this package via BiocManager, please use the following codes.
+
+```{r, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("RgnTX")
+```
 
 # What is the difference between permutation tests in the genome and the transcriptome? 
 
@@ -285,7 +304,7 @@ We expect users to input features following the format stated in section [3](#fe
 Here we load an m$^6$A dataset as an input feature.
 
 ```{r, message=FALSE, warning=FALSE}
-file <- system.file(package="RgnTX", "extdata/m6A_sites_data.rds")
+file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
 m6A_sites_data[1:5]
 ```
@@ -440,7 +459,7 @@ As a quick example, we feed 500 out of 9181 m$^6$A sites and this `getStopCodon`
 ```{r Fig10, fig.cap = " Association between N6-Methyladenosine (500 sites) and stop codon regions.", warning=FALSE, message=FALSE}
 set.seed(12345677)
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-file <- system.file(package="RgnTX", "extdata/m6A_sites_data.rds")
+file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
 RS1 <- m6A_sites_data[1:500]
 
@@ -630,7 +649,7 @@ Let's take the case in section [5.2.2](#permtesttxia_custompick-function) as an 
 
 ```{r Fig14, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 2000 and step 200."}
 set.seed(12345677)
-file <- system.file(package="RgnTX", "extdata/m6A_sites_data.rds")
+file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
 RS1 <- m6A_sites_data[1:500]
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene

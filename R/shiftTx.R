@@ -28,7 +28,7 @@
 #' cds.p <- cds.tx0[trans.id.pstv]
 #'
 #' width <- 200
-#' start = as.numeric(max(end(cds.p)))
+#' start <- as.numeric(max(end(cds.p)))
 #' R.cds.last200 <- shiftTx(cds.p, start = start, width = width,
 #' direction = 'left', strand = "+")
 

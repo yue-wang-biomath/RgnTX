@@ -39,16 +39,7 @@ randomizeFeaturesTxIA <- function(RS, txdb, type = "mature", N = 1, ...) {
 
     if (!is(RS, "GRanges")) {
         stop("RS must be GRanges.")
-
-        if (!is.character(type)) {
-            stop("type must be character.")
-        }
-
-        if (!is.numeric(N)) {
-            stop("N must be numeric.")
-        }
     }
-
 
     features <- RS
 
@@ -76,10 +67,6 @@ randomizeFeaturesTxIA <- function(RS, txdb, type = "mature", N = 1, ...) {
     }
     randomResults.List <- lapply(seq_len(N), getRandomFeaturesIA)
 
-    if (N == 1) {
-        return(randomResults.List[[1]])
-    }
-    if (N > 1) {
-        return(randomResults.List)
-    }
+    if (N == 1) {return(randomResults.List[[1]])}
+    if (N > 1) {return(randomResults.List)}
 }

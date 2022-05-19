@@ -32,28 +32,9 @@
 #' )
 #' distanceTx(A, B, beta = 0.2)
 distanceTx <- function(A, B, beta = 0.2, ...) {
-    if (is(A, "GRangesList")) {
-        A <- GRangesList2GRanges(A)
-    }
-    if (is(B, "GRangesList")) {
-        B <- GRangesList2GRanges(B)
-    }
-
-    if (!is(A, "GRanges")) {
-        stop("A should be either GRanges or GRangesList.")
-    }
-    if (!is(B, "GRanges")) {
-        stop("B should be either GRanges or GRangesList.")
-    }
-
-    if (length(A$group) == 0) {
-        A$group <- seq_len(length(A))
-    }
-
-    if (length(B$group) == 0) {
-        B$group <- seq_len(length(B))
-    }
-
+    A_B <- getFormatCorrect(A, B)
+    A <- A_B[[1]]
+    B <- A_B[[2]]
     suppressWarnings(
         distance.frame <- data.frame(distanceToNearest(A, B))
     )

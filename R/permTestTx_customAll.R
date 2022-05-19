@@ -44,49 +44,11 @@
 #' permTestTx_results <- permTestTx_customAll(RSL = RSL, RS1 = RS1, RS2 = RS2)
 permTestTx_customAll <- function(RSL = NULL, RS1 = NULL, RS2 = NULL, ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE, ...) {
     orig.ev <- ev_function_1(RS1, RS2,...)
-    rand.ev <- lapply(RSL, function(x) {
-                return(ev_function_2(RS2, x,...))
-    })
-    rand.ev <- unlist(rand.ev)
+    rand.ev <- lapply(RSL, function(x) {return(ev_function_2(RS2, x,...))})
 
-    ntimes <- length(rand.ev)
-    # orig.ev < rand.ev
-    if (orig.ev < mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev >= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= FALSE)
-        }
-    }
-    # orig.ev >= rand.ev
-    if (orig.ev >= mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev <= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= TRUE)
-        }
-    }
-    pval <- round(pval, 6)
-
-    permTestTx.results <- list(
-        RSL, RS1, RS2, orig.ev, rand.ev, pval, zscore,
-        ntimes
-    )
-    names(permTestTx.results) <- c(
-        "RSL", "RS1", "RS2", "orig.ev", "rand.ev",
-        "pval", "zscore", "ntimes"
-    )
+    pval_zscore <- getPvalZscore(orig.ev, unlist(rand.ev), pval_z = pval_z)
+    permTestTx.results <- list(RSL, RS1, RS2, orig.ev, unlist(rand.ev), pval_zscore[1], pval_zscore[2], length(unlist(rand.ev)))
+    names(permTestTx.results) <- c("RSL", "RS1", "RS2", "orig.ev", "rand.ev", "pval", "zscore", "ntimes")
     class(permTestTx.results) <- "permTestTx.results"
     return(permTestTx.results)
 }

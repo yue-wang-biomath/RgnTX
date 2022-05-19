@@ -1,6 +1,6 @@
 Package: RgnTX
 Title: Colocalization analysis of transcriptome elements in the presence of isoform heterogeneity and ambiguity
-Version: 0.99.6
+Version: 0.99.7
 Authors@R: c(
     person("Yue", "Wang", , "yue.wang19@student.xjtlu.edu.cn", role = c("aut", "cre")),
     person("Jia", "Meng", , "jia.meng@xjtlu.edu.cn", role = c("aut")))
@@ -8,7 +8,7 @@ Description: RgnTX allows the integration of transcriptome annotations so as to 
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 biocViews: AlternativeSplicing, Sequencing, RNASeq, MethylSeq, Transcription, SplicedAlignment
 Imports: 
     GenomeInfoDb,
@@ -23,7 +23,7 @@ Imports:
     stats,
     TxDb.Hsapiens.UCSC.hg19.knownGene
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 Suggests: 
     BiocStyle,
     rmarkdown,

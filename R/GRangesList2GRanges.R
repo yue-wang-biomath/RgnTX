@@ -1,7 +1,7 @@
 #' Convert a GRangesList object to a GRanges object
 #' @export GRangesList2GRanges
 #'
-#' @description Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the main permutation test functions.
+#' @description Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions.
 #'
 #' @usage GRangesList2GRanges(A = NULL)
 #'

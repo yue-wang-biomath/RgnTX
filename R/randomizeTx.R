@@ -32,24 +32,6 @@ randomizeTx <- function(txdb, trans_ids = "all", random_num = 100, random_length
 
     # This function is the first method.
 
-    # make sure the inputs are reasonable
-
-    if (!is.character(trans_ids)) {
-        stop("trans_ids must be character.")
-    }
-
-    if (!is.numeric(random_num)) {
-        stop("random_num must be numeric.")
-    }
-
-    if (!is.numeric(random_length)) {
-        stop("random_length must be numeric.")
-    }
-
-    if (!is.numeric(N)) {
-        stop("N must be numeric.")
-    }
-
     perm.space <- getPermSpaceByTxID(trans_ids = trans_ids, txdb, type = type)
 
     getRandomResultsList <- function(x) {
@@ -59,10 +41,6 @@ randomizeTx <- function(txdb, trans_ids = "all", random_num = 100, random_length
         return(randomResults)
     }
     randomResults.List <- lapply(seq_len(N), getRandomResultsList)
-    if (N == 1) {
-        return(randomResults.List[[1]])
-    }
-    if (N > 1) {
-        return(randomResults.List)
-    }
+    if (N == 1) {return(randomResults.List[[1]])}
+    if (N > 1) {return(randomResults.List)}
 }

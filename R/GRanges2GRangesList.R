@@ -63,42 +63,13 @@ GRanges2GRangesList <- function(A = NULL) {
     targetStart <- lapply(group.index, function(x) {
         return(group.start[x])
     })
-    targetStart <- as.character(targetStart)
-    targetStart <- lapply(targetStart, function(x) {
-        process1 <- gsub("[(.*)]", "", x)
-        process2 <- gsub("c", "", process1)
-        process3 <- gsub(" ", "", process2)
-        process4 <- gsub(":", ",", process3)
-        process5 <- paste0(process4, ",")
-        return(process5)
-    })
-    targetStart <- unlist(targetStart)
 
     # blockSizes
     blockSizes <- lapply(group.index, function(x) {
         return(group.width[x])
     })
-    blockSizes <- as.character(blockSizes)
-    blockSizes <- lapply(blockSizes, function(x) {
-        process1 <- gsub("[(.*)]", "", x)
-        process2 <- gsub("c", "", process1)
-        process3 <- gsub(" ", "", process2)
-        process4 <- gsub(":", ",", process3)
-        process5 <- paste0(process4, ",")
-        return(process5)
-    })
-    blockSizes <- unlist(blockSizes)
 
-    A.frags <- cbind(RefSeqID, targetName, strand, targetStart, blockSizes)
-    A.frags <- data.frame(A.frags)
-    A.list <- with(A.frags, makeGRangesListFromFeatureFragments(
-        seqnames = targetName,
-        fragmentStarts = targetStart, fragmentWidths = blockSizes, strand = strand
-    ))
-
-    if (length(which(is.na(trans.id) == FALSE)) != 0) {
-        names(A.list) <- A.frags$RefSeqID
-    }
+    A.list <- vector2GRangesList(RefSeqID, targetName, strand, blockSizes, targetStart)
 
     return(A.list)
 }

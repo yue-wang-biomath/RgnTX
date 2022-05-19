@@ -2,7 +2,7 @@
 #' @export plotPermResults
 #' @importFrom graphics hist
 #' @importFrom stats dnorm qnorm
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes annotate arrow element_blank element_line element_text geom_histogram geom_line geom_polygon geom_segment labs stat_function theme unit xlab ylab ylim
 #'
 #' @description Show a graphical representation of permutation test.
 #'

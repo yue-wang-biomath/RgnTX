@@ -30,20 +30,9 @@
 #'
 #' overlapWidthTx(A, B)
 overlapWidthTx <- function(A, B, ...) {
-    if(is(A, 'GRangesList')){
-        A <- GRangesList2GRanges(A)
-    }
-    if(is(B, 'GRangesList')){
-        B <- GRangesList2GRanges(B)
-    }
-
-    if(!is(A, 'GRanges')){
-        stop('A should be either GRanges or GRangesList.')
-    }
-    if(!is(B, 'GRanges')){
-        stop('B should be either GRanges or GRangesList.')
-    }
-
+    A_B <- getFormatCorrect(A, B)
+    A <- A_B[[1]]
+    B <- A_B[[2]]
     if (length(A$transcriptsHits) != 0 & length(B$transcriptsHits) != 0) {
         suppressWarnings(
             map.df <- data.frame(findOverlaps(A, B))

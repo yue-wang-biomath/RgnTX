@@ -45,52 +45,7 @@
 #' permTestTx_results <- permTestTx(A, B, txdb, ntimes = 5)
 
 permTestTx <- function(RS1 = NULL, RS2 = NULL, txdb = NULL, type = "mature", ntimes = 50, ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE, ...) {
-    orig.ev <- ev_function_1(RS1, RS2, ...)
     RSL <- randomizeFeaturesTx(RS1, txdb, type, N = ntimes)
-
-    rand.ev <- lapply(RSL, function(x) {
-        return(ev_function_2(RS2, x, ...))
-    })
-    rand.ev <- unlist(rand.ev)
-
-    ntimes <- length(rand.ev)
-    # orig.ev < rand.ev
-    if (orig.ev < mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev >= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= FALSE)
-        }
-    }
-    # orig.ev >= rand.ev
-    if (orig.ev >= mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev <= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= TRUE)
-        }
-    }
-    pval <- round(pval, 6)
-
-    permTestTx.results <- list(
-        RSL, RS1, RS2, orig.ev, rand.ev, pval, zscore,
-        ntimes
-    )
-    names(permTestTx.results) <- c(
-        "RSL", "RS1", "RS2", "orig.ev", "rand.ev",
-        "pval", "zscore", "ntimes"
-    )
-    class(permTestTx.results) <- "permTestTx.results"
+    permTestTx.results <- permTestTx_customAll(RSL = RSL, RS1 = RS1, RS2 = RS2, txdb = txdb, ev_function_1 = ev_function_1, ev_function_2= ev_function_2, pval_z = pval_z,...)
     return(permTestTx.results)
 }

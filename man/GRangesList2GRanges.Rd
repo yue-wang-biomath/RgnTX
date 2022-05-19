@@ -13,7 +13,7 @@ GRangesList2GRanges(A = NULL)
 A \code{GRanges} object.
 }
 \description{
-Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the main permutation test functions.
+Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

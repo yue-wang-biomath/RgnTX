@@ -28,27 +28,9 @@
 #'
 #' overlapCountsTx(A, B)
 overlapCountsTx <- function(A, B, count_once = TRUE, over_trans = TRUE, ...) {
-    if (is(A, "GRangesList")) {
-        A <- GRangesList2GRanges(A)
-    }
-    if (is(B, "GRangesList")) {
-        B <- GRangesList2GRanges(B)
-    }
-
-    if (!is(A, "GRanges")) {
-        stop("A should be either GRanges or GRangesList.")
-    }
-    if (!is(B, "GRanges")) {
-        stop("B should be either GRanges or GRangesList.")
-    }
-
-    if (length(A$group) == 0) {
-        A$group <- seq_len(length(A))
-    }
-
-    if (length(B$group) == 0) {
-        B$group <- seq_len(length(B))
-    }
+    A_B <- getFormatCorrect(A, B)
+    A <- A_B[[1]]
+    B <- A_B[[2]]
     suppressWarnings(
         map.df <- data.frame(findOverlaps(A, B))
     )
@@ -60,7 +42,7 @@ overlapCountsTx <- function(A, B, count_once = TRUE, over_trans = TRUE, ...) {
                 B.transcriptsHits <- B$transcriptsHits[map.df[, 2]]
                 map.df <- map.df[A.transcriptsHits == B.transcriptsHits, ]
             } else {
-                print("Either A or B does not provide transcript id information. Their overlapping is counted at genome level rather than transcriptome")
+                message("Either A or B does not provide transcript id information. Their overlapping is counted at genome level rather than transcriptome")
             }
         }
 

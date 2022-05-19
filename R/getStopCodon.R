@@ -38,12 +38,7 @@ getStopCodon <- function(trans_ids, txdb, ...) {
     if (length(names.p) != 0) {
         cds.p <- cds.tx0[names.p]
         cds.p.start <- as.numeric(max(end(cds.p)))
-        disp.p.l <- data.frame(
-            start = cds.p.start, distance = dist - 1,
-            names = names.p
-        )
-        R.p.l <- calculateShift(cds.p, disp.p.l, direction = "left", strand = "+")
-        R.p.l.exons <- extractRegions(regions_A = cds.p, R = R.p.l, strand = "+")
+        R.p.l.exons <- shiftTx(cds.p, cds.p.start, dist, direction = "left", strand = "+")
     } else {
         R.p.l.exons <- c()
     }
@@ -52,12 +47,8 @@ getStopCodon <- function(trans_ids, txdb, ...) {
     if (length(names.n) != 0) {
         cds.n <- cds.tx0[names.n]
         cds.n.start <- as.numeric(min(start(cds.n)))
-        disp.n.l <- data.frame(
-            start = cds.n.start, distance = dist - 1,
-            names = names.n
-        )
-        R.n.l <- calculateShift(cds.n, disp.n.l, direction = "left", strand = "-")
-        R.n.l.exons <- extractRegions(regions_A = cds.n, R = R.n.l, strand = "-")
+        R.n.l.exons <- shiftTx(cds.n, cds.n.start, dist, direction = "left", strand = "-")
+
     } else {
         R.n.l.exons <- c()
     }
@@ -75,16 +66,8 @@ getStopCodon <- function(trans_ids, txdb, ...) {
     if (length(names.p) != 0) {
         threeUTR.p <- threeUTR.tx0[names.p]
         threeUTR.p.start <- as.numeric(min(start(threeUTR.p)))
-        disp.p.r <- data.frame(start = threeUTR.p.start, distance = dist -
-            1, names = names.p)
-        R.p.r <- calculateShift(threeUTR.p, disp.p.r,
-            direction = "right",
-            strand = "+"
-        )
-        R.p.r.exons <- extractRegions(
-            regions_A = threeUTR.p, R = R.p.r,
-            strand = "+"
-        )
+        R.p.r.exons <- shiftTx(threeUTR.p, threeUTR.p.start, dist, direction = "right", strand = "+")
+
     } else {
         R.p.r.exons <- c()
     }
@@ -93,16 +76,8 @@ getStopCodon <- function(trans_ids, txdb, ...) {
     if (length(names.n) != 0) {
         threeUTR.n <- threeUTR.tx0[names.n]
         threeUTR.n.start <- as.numeric(max(end(threeUTR.n)))
-        disp.n.r <- data.frame(start = threeUTR.n.start, distance = dist -
-            1, names = names.n)
-        R.n.r <- calculateShift(threeUTR.n, disp.n.r,
-            direction = "right",
-            strand = "-"
-        )
-        R.n.r.exons <- extractRegions(
-            regions_A = threeUTR.n, R = R.n.r,
-            strand = "-"
-        )
+        R.n.r.exons <- shiftTx(threeUTR.n, threeUTR.n.start, dist, direction = "right", strand = "-")
+
     } else {
         R.n.r.exons <- c()
     }

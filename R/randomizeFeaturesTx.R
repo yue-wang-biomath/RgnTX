@@ -28,31 +28,12 @@ randomizeFeaturesTx <- function(RS, txdb, type = "mature", N = 1, ...) {
 
     # This function is the second method.
 
-    # make sure the inputs are reasonable.
-
-    if (!is(RS, "GRanges") & !is(RS, "CompressedGRangesList")) {
-        stop("RS must be GRanges or GRangesList.")
-
-        if (!is(type, "character")) {
-            stop("type must be character.")
-        }
-
-        if (!is(N, "numeric")) {
-            stop("N must be numeric.")
-        }
-    }
-
     # If input RS is GRangesList:
     if (is(RS, "CompressedGRangesList")) {
         if (is.character(names(RS))) {
             features <- RS
         }
-
-        # If transcript id information is not provided:
-        if (!is.character(names(RS))) {
-            stop("Transcript id information is missing. The name of each list element in RS should be the id of the transcript it pertains to.")
-        }
-    }
+     }
 
     # If input RS is GRanges:
     if (is(RS, "GRanges")) {
@@ -74,11 +55,8 @@ randomizeFeaturesTx <- function(RS, txdb, type = "mature", N = 1, ...) {
         randomResults <- randomizeTransByOrder(regions.A, random.length)
         return(randomResults)
     }
+
     randomResults.List <- lapply(seq_len(N), getRandomFeatures)
-    if (N == 1) {
-        return(randomResults.List[[1]])
-    }
-    if (N > 1) {
-        return(randomResults.List)
-    }
+    if (N == 1) {return(randomResults.List[[1]])}
+    if (N > 1) {return(randomResults.List)}
 }

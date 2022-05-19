@@ -56,56 +56,16 @@ permTestTxIA_customPick <- function(RS1 = NULL, txdb = NULL, type = "mature",
     # Use input custom_function function to generate RS2.
     RS2 <- customPick_function(trans_ids = trans.id, txdb = txdb, ...)
 
-    # Evaluation step.
-    orig.ev <- ev_function_1(RS1, RS2,...)
-
     # Generate a list of randomized regions of RS1.
     RSL <- randomizeFeaturesTxIA(RS1, txdb, type, N = ntimes)
 
-    # Calculate overlapping counts between RSL and RS2.
-    rand.ev <- lapply(RSL, function(x) {
-        return(ev_function_2(x, RS2, ...))
-    })
-    rand.ev <- unlist(rand.ev)
-
-    ntimes <- length(rand.ev)
-    # orig.ev < rand.ev
-    if (orig.ev < mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev >= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= FALSE)
-        }
-    }
-    # orig.ev >= rand.ev
-    if (orig.ev >= mean(rand.ev)) {
-        zscore <- round((orig.ev - mean(rand.ev, na.rm = TRUE)) / sd(rand.ev, na.rm = TRUE), 4)
-        xcoords <- rand.ev
-        rand.mean <- mean(xcoords, na.rm = TRUE)
-        rand.sd <- sd(xcoords, na.rm = TRUE)
-        ntimes <- length(RSL)
-        if (pval_z == FALSE){
-            pval <- (sum(orig.ev <= rand.ev, na.rm = TRUE) + 1) / (ntimes + 1)
-        }else{
-            pval <- pnorm(orig.ev, mean(rand.ev), sd(rand.ev),lower.tail= TRUE)
-        }
-    }
-    pval <- round(pval, 6)
-
-    permTestTx.results <- list(
-        RSL, RS1, RS2, orig.ev, rand.ev, pval, zscore,
-        ntimes
-    )
-    names(permTestTx.results) <- c(
-        "RSL", "RS1", "RS2", "orig.ev", "rand.ev",
-        "pval", "zscore", "ntimes"
-    )
+    # Evaluate the observed value.
+    orig.ev <- ev_function_1(RS1, RS2,...)
+    rand.ev <- lapply(RSL, function(x) {return(ev_function_2(x, RS2, ...))})
+    pval_zscore <- getPvalZscore(orig.ev, unlist(rand.ev))
+    permTestTx.results <- list(RSL, RS1, RS2, orig.ev, unlist(rand.ev), pval_zscore[1], pval_zscore[2], length(unlist(rand.ev)))
+    names(permTestTx.results) <- c("RSL", "RS1", "RS2", "orig.ev", "rand.ev", "pval", "zscore", "ntimes")
     class(permTestTx.results) <- "permTestTx.results"
     return(permTestTx.results)
+
 }

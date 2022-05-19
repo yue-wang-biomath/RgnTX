@@ -78,7 +78,7 @@ shiftedZScoreTx <- function(permTestTx_results = NULL, txdb = NULL, window = 200
 
     shifted <- lapply(shifts, shifted.z.score)
     shifted.z.scores <- do.call(c, shifted)
-    shifted.z.scores[num.steps+1] = original.z.score
+    shifted.z.scores[num.steps+1] <- original.z.score
 
     shitedZScoresTx_results <- list(shifted.z.scores, shifts, window, original.z.score)
     names(shitedZScoresTx_results) <- c(

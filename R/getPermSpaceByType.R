@@ -55,27 +55,11 @@ getPermSpaceByType <- function(txdb, type = "mature") {
         strand <- as.character(strand)
         # blockSizes
         blockSizes <- trans.tx0.df[, "width"]
-        blockSizes <- lapply(blockSizes, function(x) {
-            process1 <- paste0(x, ",")
-            return(process1)
-        })
-        blockSizes <- unlist(blockSizes)
+
         # targetStart
         targetStart <- trans.tx0.df[, "start"]
-        targetStart <- lapply(targetStart, function(x) {
-            process1 <- paste0(x, ",")
-            return(process1)
-        })
-        targetStart <- unlist(targetStart)
 
-        A.frags <- cbind(RefSeqID, targetName, strand, targetStart, blockSizes)
-        A.frags <- data.frame(A.frags)
-        regions.A <- with(A.frags, makeGRangesListFromFeatureFragments(
-            seqnames = targetName,
-            fragmentStarts = targetStart, fragmentWidths = blockSizes,
-            strand = strand
-        ))
-        names(regions.A) <- A.frags$RefSeqID
+        regions.A <- vector2GRangesList(RefSeqID, targetName, strand, blockSizes, targetStart)
     }
 
     if (is.null(regions.A)) {
