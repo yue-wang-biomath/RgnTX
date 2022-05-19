@@ -1,6 +1,6 @@
 # RgnTX
 
-**To install this package, please use the following codes.**
+**To install this package via devtools, please use the following codes.**
 ```
 if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
