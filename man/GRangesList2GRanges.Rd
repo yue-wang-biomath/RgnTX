@@ -10,10 +10,10 @@ GRangesList2GRanges(A = NULL)
 \item{A}{A \code{GRangesList} object.}
 }
 \value{
-A \code{GRanges} object.
+A \code{GRanges} object. Its transcript ids (if available) should be contained in a metadata column named “transcriptsHits”, which are provided by the names of input \code{GRangesList} object.
 }
 \description{
-Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions.
+Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions, which should have metadata columns 'group' and 'transcriptsHits'.
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

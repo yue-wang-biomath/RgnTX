@@ -11,20 +11,10 @@
 #'
 #' @seealso \code{\link{shiftedZScoreTx}}
 #' @examples
-#' library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-#' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-#' file <- system.file(package="RgnTX", "extdata/m6A_sites_data.rds")
-#' m6A_sites_data <- readRDS(file)
-#' RS1 <- m6A_sites_data[1:500]
-#' permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
-#'                                             txdb = txdb,
-#'                                             customPick_function = getStopCodon,
-#'                                             ntimes = 5)
-#' shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, txdb = txdb,
-#'                                             window = 2000,
-#'                                             step = 200,
-#'                                             ev_function_1 = overlapCountsTxIA)
+#' file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results1.rds")
+#' shiftedZScoreTx_results <- readRDS(file)
 #' p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
+#' p1
 
 
 plotShiftedZScoreTx <- function(shitedZScoresTx_results) {

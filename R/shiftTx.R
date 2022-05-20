@@ -29,8 +29,7 @@
 #'
 #' width <- 200
 #' start <- as.numeric(max(end(cds.p)))
-#' R.cds.last200 <- shiftTx(cds.p, start = start, width = width,
-#' direction = 'left', strand = "+")
+#' R.cds.last200 <- shiftTx(cds.p, start = start, width = width, direction = 'left', strand = "+")
 
 shiftTx = function(regions, start, width, direction, strand){
     if (is(regions, "GRanges")) {

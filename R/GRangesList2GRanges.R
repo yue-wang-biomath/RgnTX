@@ -1,13 +1,13 @@
 #' Convert a GRangesList object to a GRanges object
 #' @export GRangesList2GRanges
 #'
-#' @description Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions.
+#' @description Convert a \code{GRangesList} object to a \code{GRanges} object. The output region set follows the format required by the RgnTX permutation test functions, which should have metadata columns 'group' and 'transcriptsHits'.
 #'
 #' @usage GRangesList2GRanges(A = NULL)
 #'
 #' @param A A \code{GRangesList} object.
 #'
-#' @return A \code{GRanges} object.
+#' @return A \code{GRanges} object. Its transcript ids (if available) should be contained in a metadata column named “transcriptsHits”, which are provided by the names of input \code{GRangesList} object.
 #'
 #' @seealso \code{\link{GRanges2GRangesList}}
 #'

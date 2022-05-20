@@ -456,7 +456,7 @@ To test this association, we wrote a customPick function `getStopCodon` picking 
 
 As a quick example, we feed 500 out of 9181 m$^6$A sites and this `getStopCodon` function into function `permTestTxIA_customPick`. Its default evaluation function calculates a weighted overlapping number between m$^6$A sites and the stop codon regions.
 
-```{r Fig10, fig.cap = " Association between N6-Methyladenosine (500 sites) and stop codon regions.", warning=FALSE, message=FALSE}
+```{r, eval = FALSE}
 set.seed(12345677)
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
@@ -469,6 +469,14 @@ permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
                                        ntimes = 50,
                                        ev_function_1 = overlapCountsTxIA,
                                        ev_function_2 = overlapCountsTx)
+p_a <- plotPermResults(permTestTx_results, binwidth = 1)
+p_a
+```
+
+```{r Fig10, echo = FALSE, fig.cap = " Association between N6-Methyladenosine (500 sites) and stop codon regions.", warning=FALSE, message=FALSE}
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+file <- system.file(package="RgnTX", "extdata", "permTestTx_results.rds")
+permTestTx_results <- readRDS(file)
 p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 p_a
 ```
@@ -647,7 +655,7 @@ Here we provide a function `shiftedZScoreTx` which shifts RNA features from thei
 
 Let's take the case in section [5.2.2](#permtesttxia_custompick-function) as an example. In this case, results show that m$^6$A modifications and the stop codon regions tend to have a strong positive association. Let's use `shiftedZScoreTx` to move m$^6$A features around its original position and calculate corresponding shifted z-scores after each moving.  
 
-```{r Fig14, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 2000 and step 200."}
+```{r, eval=FALSE}
 set.seed(12345677)
 file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
@@ -667,16 +675,30 @@ p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 p1
 ```
 
+```{r Fig14, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 2000 and step 200."}
+file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results1.rds")
+shiftedZScoreTx_results <- readRDS(file)
+p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
+p1
+```
+
 We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m$^6$A features. 
 
 Fig. \@ref(fig:Fig15) shows the scenario if we move the features within a smaller window. To see how a smaller position shift applied to features affects the z-scores, we set smaller values for the `window` and `step` arguments. 
 
-```{r Fig15, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 300 and step 10."}
+```{r, eval=FALSE}
 set.seed(12345677)
 shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, 
                                            window = 300, 
                                            step = 10, txdb = txdb,
                                            ev_function_1 = overlapCountsTxIA)
+p2 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
+p2
+```
+
+```{r Fig15, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 300 and step 10."}
+file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results2.rds")
+shiftedZScoreTx_results <- readRDS(file)
 p2 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 p2
 ```

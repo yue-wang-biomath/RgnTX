@@ -20,14 +20,10 @@
 #' @seealso \code{\link{permTestTx}}
 #'
 #' @examples
-#' library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-#' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-#' exons.tx0 <- exonsBy(txdb)
-#' trans.ids <- sample(names(exons.tx0), 500)
-#' A <- randomizeTx(txdb, trans.ids, random_num = 100, random_length = 100)
-#' B <- c(randomizeTx(txdb, trans.ids, random_num = 75, random_length = 100), A[1:25])
-#' permTestTx_results <- permTestTx(A, B, txdb, ntimes = 10)
-#' p1 <- plotPermResults(permTestTx_results, binwidth = 1)
+#' file <- system.file(package="RgnTX", "extdata", "permTestTx_results.rds")
+#' permTestTx_results <- readRDS(file)
+#' p_a <- plotPermResults(permTestTx_results, binwidth = 1)
+#' p_a
 plotPermResults <- function(permTestTx_results = NULL, breaks = 15, alpha = 0.05,
                             test_type = "one-sided", binwidth = NULL) {
     if(!is(permTestTx_results, 'permTestTx.results')){
