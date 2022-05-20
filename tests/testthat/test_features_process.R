@@ -2,7 +2,6 @@ library(RgnTX)
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 
 # Load data the following tests need.
-# Load data the following tests need.
 file1 <- system.file(package = "RgnTX", "extdata/randomRegionSet1.rds")
 randomRegionSet1 <- readRDS(file1)
 

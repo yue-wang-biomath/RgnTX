@@ -31,9 +31,9 @@ overlapCountsTx <- function(A, B, count_once = TRUE, over_trans = TRUE, ...) {
     A_B <- getFormatCorrect(A, B)
     A <- A_B[[1]]
     B <- A_B[[2]]
-    suppressWarnings(
-        map.df <- data.frame(findOverlaps(A, B))
-    )
+
+    map.df <- data.frame(findOverlaps(A, B))
+
     if (nrow(map.df) != 0) {
         if (over_trans == TRUE) {
             if (length(A$transcriptsHits) != 0 && length(B$transcriptsHits) != 0) {

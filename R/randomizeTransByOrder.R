@@ -32,9 +32,9 @@ randomizeTransByOrder <-
 
         p.index <- which(data.frame(unique(strand(regions.A)))[, 'value'] == '+')
         n.index <- which(data.frame(unique(strand(regions.A)))[, 'value'] == '-')
-        suppressWarnings(
-            dist <- round(runif(random.num)*(A.length - random.length))
-        )
+
+        dist <- round(runif(random.num)*(A.length - random.length))
+
         dist[dist <= 0] <- 0
 
 
