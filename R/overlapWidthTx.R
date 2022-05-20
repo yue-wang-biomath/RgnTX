@@ -34,20 +34,20 @@ overlapWidthTx <- function(A, B, ...) {
     A <- A_B[[1]]
     B <- A_B[[2]]
     if (length(A$transcriptsHits) != 0 & length(B$transcriptsHits) != 0) {
-
-        map.df <- data.frame(findOverlaps(A, B))
-
+        suppressWarnings(
+            map.df <- data.frame(findOverlaps(A, B))
+        )
         A.id <- A$transcriptsHits[map.df[, 1]]
         B.id <- B$transcriptsHits[map.df[, 2]]
 
         # Filter out wrong mapping Filter out ranges are not on the same transcript.
-
+        suppressWarnings(
         overlapRegions.frame <- overlapRegions(A, B)[A.id == B.id, ]
-
+        )
     } else {
-
+        suppressWarnings(
         overlapRegions.frame <- overlapRegions(A, B)
-
+        )
     }
 
     frame1 <- overlapRegions.frame[overlapRegions.frame[, "type"] == "AleftB", ]

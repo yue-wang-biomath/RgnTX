@@ -35,8 +35,9 @@ distanceTx <- function(A, B, beta = 0.2, ...) {
     A_B <- getFormatCorrect(A, B)
     A <- A_B[[1]]
     B <- A_B[[2]]
-
-    distance.frame <- data.frame(distanceToNearest(A, B))
+    suppressWarnings(
+        distance.frame <- data.frame(distanceToNearest(A, B))
+    )
 
     distances <- distance.frame[, "distance"]
     distances <- sort(distances)

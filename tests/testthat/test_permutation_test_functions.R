@@ -30,6 +30,16 @@ test_that("Test the shiftedZScoreTx function", {
     expect_error(plotShiftedZScoreTx(""), "Argument shitedZScoresTx_results must be a shitedZScoreTx.results object.")
 })
 
+permTestTx_results <- permTestTxIA(RS1 = m6A_sites_data[1:10], RS2 = randomRegionSet2, txdb = txdb, ntimes = 2)
+test_that("Test the permTestTxIA_customPick function", {
+    expect_type(permTestTx_results, "list")
+    expect_type(permTestTx_results$RSL, "list")
+    expect_s4_class(permTestTx_results$RSL[[1]], "GRangesList")
+    expect_equal(length(permTestTx_results), 8)
+    expect_true(is(permTestTx_results, "permTestTx.results"))
+    expect_error(plotPermResults(""), "Argument permTestTx_results must be a permTestTx.results object.")
+})
+
 getCDS <- function(trans_ids, ...) {
     cds.tx0 <- cdsBy(txdb, use.names = FALSE)
     cds.names <- as.character(intersect(names(cds.tx0), trans_ids))

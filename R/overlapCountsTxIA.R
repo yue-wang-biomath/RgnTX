@@ -63,7 +63,9 @@ overlapCountsTxIA <- function(A, B, ...) {
             x)))
     }))
 
+    suppressWarnings(
     map.df <- data.frame(findOverlaps(A, B))
+    )
 
     A.group <- A$group[map.df[, 1]]
     B.group <- B$group[map.df[, 2]]
