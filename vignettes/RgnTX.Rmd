@@ -13,7 +13,7 @@ author:
   email: Jia.Meng@xjtlu.edu.cn
    
 date: "`r Sys.Date()`"
-abstract: This vignette describes the Bioconductor RgnTX package. We developed it for the colocalization analysis of transcriptome elements, where permutation test is performed to statistically estimate association between transcriptome region sets. RgnTX allows restriction of user-defined transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
+abstract: This vignette describes the Bioconductor RgnTX package. We developed it for the colocalization analysis of transcriptome elements, where permutation test is performed to statistically estimate association between transcriptome region sets. RgnTX allows user-defined restriction of transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
 
 output:
    BiocStyle::html_document:
@@ -45,7 +45,7 @@ Currently, colocalization analysis of two genomic region sets has been widely us
 [RgnTX](https://github.com/yue-wang-biomath/RgnTX) extends an assumption-free permutation test framework transcriptome-wide. Different from existing approaches, [RgnTX](https://github.com/yue-wang-biomath/RgnTX) allows the integration of transcriptome annotations so as to model the complex alternative splicing patterns. Importantly, it also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
 
 
-[RgnTX](https://github.com/yue-wang-biomath/RgnTX) makes a useful tool for transcriptome region set association analysis. In this vignette, with some simulated datasets, we show that permutation tests conducted in the genome and the transcriptome are significantly different and may return distinct results in section [2](#what-is-the-difference-between-permutation-tests-in-the-genome-and-the-transcriptome). The most core functions for conducting permutation tests and examples with real datasets are introduced in section [5](#permutation-test-function).
+[RgnTX](https://github.com/yue-wang-biomath/RgnTX) makes a useful tool for transcriptome region set association analysis. In this vignette, with some simulated datasets, we show that permutation tests conducted in the genome and the transcriptome are significantly different and may return distinct results in section [2](#what-is-the-difference-between-permutation-tests-in-the-genome-and-the-transcriptome). The most core functions for conducting permutation tests and examples with real datasets are introduced in section [6](#permutation-test-function).
 
 # What is the difference between permutation tests in the genome and the transcriptome? 
 
@@ -71,12 +71,12 @@ knitr::include_graphics("figures/section2.2.png")
 knitr::include_graphics("figures/section2.3.png")
 ```
 
-This is supported by the [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `randomizeFeaturesTx` and the function `randomizeFeaturesTxIA`. The former is for features with known isoform belongings. The latter is for features with isoform ambiguity (IA). Besides, [RgnTX](https://github.com/yue-wang-biomath/RgnTX) also provides function `randomizeTx` supporting picking random region sets within any specified transcriptome space.  Users can choose a suitable strategy to do randomization conveniently within only a few lines of codes. More details about this are introduced in section [4](#randomization-function).
+This is supported by the [RgnTX](https://github.com/yue-wang-biomath/RgnTX) function `randomizeFeaturesTx` and the function `randomizeFeaturesTxIA`. The former is for features with known isoform belongings. The latter is for features with isoform ambiguity (IA). Besides, [RgnTX](https://github.com/yue-wang-biomath/RgnTX) also provides function `randomizeTx` supporting picking random region sets within any specified transcriptome space.  Users can choose a suitable strategy to do randomization conveniently within only a few lines of codes. More details about this are introduced in section [5](#randomization-function).
 
 ## Evaluation step
 Another non-trivial task is to develop evaluation function for a test statistic, such as the number of overlaps, to be tested between two region sets. A key limitation of existing evaluation approaches is that, they were designed primarily for genome-based evaluation. Two transnscriptome elements with shared exons but are located on the independent transcripts are also considered to have overlaps by them. The information of transcripts is totally lost during comparison, which can induce substantial bias when applying to analyze transcriptome region sets.
 
-[RgnTX](https://github.com/yue-wang-biomath/RgnTX) provides several strategies for transcriptome-level evaluation. Function `overlapCountsTX` counts the number of overlaps between two transcriptome elements in the transcriptome directly. Function `overlapCountsTXIA` calculates a weighted number of overlaps between a feature set (with isoform ambiguity) and a transcriptome region set (without isoform ambiguity). It is also possible to write a custom evaluation function and pass it to the main permutation test function. Details about this part are introduced in section [6](#evaluation-function).
+[RgnTX](https://github.com/yue-wang-biomath/RgnTX) provides several strategies for transcriptome-level evaluation. Function `overlapCountsTX` counts the number of overlaps between two transcriptome elements in the transcriptome directly. Function `overlapCountsTXIA` calculates a weighted number of overlaps between a feature set (with isoform ambiguity) and a transcriptome region set (without isoform ambiguity). It is also possible to write a custom evaluation function and pass it to the main permutation test function. Details about this part are introduced in section [7](#evaluation-function).
 
 ## Comparison of permutations over different kinds of spaces 
 
@@ -162,7 +162,7 @@ example.list <- GRanges2GRangesList(example.gr)
 
 # Randomization function
 
-In [RgnTX](https://github.com/yue-wang-biomath/RgnTX), there are mainly two kinds of randomization functions. One can pick random regions over a specified space (see section [4.1](#pick-random-regions-over-a-specified-space)). One can also randomize specified features into transcriptome, i.e., input a set of features and get a randomized result of it (see section [4.2](#randomize-features-into-transcriptome)).
+In [RgnTX](https://github.com/yue-wang-biomath/RgnTX), there are mainly two kinds of randomization functions. One can pick random regions over a specified space (see section [5.1](#pick-random-regions-over-a-specified-space)). One can also randomize specified features into transcriptome, i.e., input a set of features and get a randomized result of it (see section [5.2](#randomize-features-into-transcriptome)).
 
 ## Pick random regions over a specified space
 
@@ -548,7 +548,7 @@ The random evaluations indicated by gray boxes are the number of overlaps betwee
 
 # Evaluation function
 
-Evaluation functions should define a statistic to be tested between two region sets. [RgnTX](https://github.com/yue-wang-biomath/RgnTX) provides some evaluation functions that can be passed to the main test functions in section [5](#permutation-test-function) via parameters `ev_function_1` or `ev_function_2`. Users can also customize their own evaluation function as examples shown in section [6.3](#custom-evaluation-function). All the evaluation functions require two input region sets following a format in section [3](#featureregion-format-in-rgntx).
+Evaluation functions should define a statistic to be tested between two region sets. [RgnTX](https://github.com/yue-wang-biomath/RgnTX) provides some evaluation functions that can be passed to the main test functions in section [5](#permutation-test-function) via parameters `ev_function_1` or `ev_function_2`. Users can also customize their own evaluation function as examples shown in section 76.3](#custom-evaluation-function). All the evaluation functions require two input region sets following a format in section [4](#featureregion-format-in-rgntx).
 
 ## overlapCountsTx function
 
@@ -556,7 +556,7 @@ Function `overlapCountsTx` calculates the number of overlaps between two region 
 
 ## overlapCountsTxIA function
 
-Function ` overlapCountsTxIA ` accepts a feature set A (with isoform ambiguity) and a region set B (without isoform ambiguity). Each feature in A related to n$_1$ isoforms in B and overlapped with n$_2$ B regions will contribute a value of n$_2$/ n$_1$ to the total number of overlaps, which may be a non-integer. This function is used in `permTestTxIA_customPick` function (see section [5.2.2](#permtesttxia_custompick-function)), calculating a weighted number of overlaps between an m$^6$A feature set (with isoform ambiguity) and a customPick region (without isoform ambiguity). 
+Function ` overlapCountsTxIA ` accepts a feature set A (with isoform ambiguity) and a region set B (without isoform ambiguity). Each feature in A related to n$_1$ isoforms in B and overlapped with n$_2$ B regions will contribute a value of n$_2$/ n$_1$ to the total number of overlaps, which may be a non-integer. This function is used in `permTestTxIA_customPick` function (see section [6.2.2](#permtesttxia_custompick-function)), calculating a weighted number of overlaps between an m$^6$A feature set (with isoform ambiguity) and a customPick region (without isoform ambiguity). 
 
 ## Custom evaluation function
 
@@ -572,7 +572,7 @@ The `distanceTx` function calculates the mean of the distance from each region i
 
 # Parameter setting
 
-In this section, we present some examples to show how different parameter settings influence permutation test results. We take the example in section [5.1.1](#permtesttx-function).
+In this section, we present some examples to show how different parameter settings influence permutation test results. We take the example in section [6.1.1](#permtesttx-function).
 
 * **test_type**: This argument receives either an `one-sided` or `two-sided` option. Fig. \@ref(fig:Fig13) (b) shows a `two-sided` test having a 95% confidence interval. Two critical regions are indicated in light blue on both sides.
 
@@ -580,7 +580,7 @@ In this section, we present some examples to show how different parameter settin
 
 * **Evaluation function**: The default evaluation statistic of ` permTestTx ` is the number of overlaps. In Fig. \@ref(fig:Fig13) (e) and (f) we try different evaluation statistics: the overlapping width and the mean of distances (with beta = 0.3) respectively.
 
-* **Randomization times**: We increase the permutation times to 500 and 2000 in Fig. \@ref(fig:Fig13) (g) and (h). A larger number of permutations leads to more accurate results but also can be more computationally expensive. For a permutation test, the randomization function takes the most proportion of the time and resources. In section [10](#performance-of-randomization-function), we discuss the efficiency of [RgnTX](https://github.com/yue-wang-biomath/RgnTX) randomization functions. 
+* **Randomization times**: We increase the permutation times to 500 and 2000 in Fig. \@ref(fig:Fig13) (g) and (h). A larger number of permutations leads to more accurate results but also can be more computationally expensive. For a permutation test, the randomization function takes the most proportion of the time and resources. In section [11](#performance-of-randomization-function), we discuss the efficiency of [RgnTX](https://github.com/yue-wang-biomath/RgnTX) randomization functions. 
 
 ```{r, eval=FALSE}
 set.seed(12345677)
@@ -665,7 +665,7 @@ The value of z-score represents how many standard deviations an observed value i
 
 Here we provide a function `shiftedZScoreTx` which shifts RNA features from their original positions, applies evaluation function reassessing association and finally calculates new z-scores, what we call shifted z-scores. Calculating shifted z-scores can help us to learn if an association is specially linked to the exact position of features. Function `plotShiftedZScoreTx` can take the output of `shiftedZScoreTx` and plot different shifted z-scores when the position of features is changed. If we saw a peak at the original point in a plot of shifted z-scores, we would say that this association is closely related to the specific position of corresponding features. 
 
-Let's take the case in section [5.2.2](#permtesttxia_custompick-function) as an example. In this case, results show that m$^6$A modifications and the stop codon regions tend to have a strong positive association. Let's use `shiftedZScoreTx` to move m$^6$A features around its original position and calculate corresponding shifted z-scores after each moving.  
+Let's take the case in section [6.2.2](#permtesttxia_custompick-function) as an example. In this case, results show that m$^6$A modifications and the stop codon regions tend to have a strong positive association. Let's use `shiftedZScoreTx` to move m$^6$A features around its original position and calculate corresponding shifted z-scores after each moving.  
 
 ```{r, eval=FALSE}
 set.seed(12345677)
@@ -721,7 +721,7 @@ In this section, we introduce a useful function that can calculate positional sh
 
 ## shiftTx function
 
-This function accepts a feature set following the format indicated in section [3](#featueregion-format-in-rgntx) and outputs a region set from it. Each output region is from each input feature. Besides this region set, it also receives a number of other parameters:
+This function accepts a feature set following the format indicated in section [4](#featueregion-format-in-rgntx) and outputs a region set from it. Each output region is from each input feature. Besides this region set, it also receives a number of other parameters:
 
 * **start**: starting positions. Each value represents a starting position in each input feature. 
 
