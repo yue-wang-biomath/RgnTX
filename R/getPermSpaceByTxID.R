@@ -22,7 +22,7 @@ getPermSpaceByTxID <- function(trans_ids = "all", txdb, type = "mature") {
 
     # make sure the inputs are reasonable
     trans.ids <- trans_ids
-    if (!is(trans.ids, "character")) {
+    if (!is.character(trans.ids)) {
         stop("trans.ids must be character.")
     }
 

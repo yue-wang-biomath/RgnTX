@@ -28,7 +28,7 @@ getPermSpaceByFeatures <- function(features, txdb, type = "mature") {
 
     # make sure the inputs are reasonable
 
-    if (!is(type, "character")) {
+    if (!is.character(type)) {
         stop("type must be character.")
     }
 

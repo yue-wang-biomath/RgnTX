@@ -1,5 +1,4 @@
 #' vector2GRangesList
-#' @export vector2GRangesList
 #'
 #' @description Generate \code{GRangesList} object from vectors. The output region set follows the format required by the main permutation test functions.
 #'
@@ -14,28 +13,6 @@
 #' @return A \code{GRangesList} object.
 #'
 #' @seealso \code{\link{GRanges2GRangesList}}
-#'
-#' @examples
-#' library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-#' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-#' trans.tx0 <- transcriptsBy(txdb, "gene")[1:2]
-#' trans.tx0.df <- data.frame(trans.tx0)
-#' trans.tx0.id <- trans.tx0.df[, "tx_id"]
-#' # RefSeqID
-#' RefSeqID <- as.character(trans.tx0.id)
-#' # targetName
-#' targetName <- trans.tx0.df[, "seqnames"]
-#' targetName <- as.character(targetName)
-#' # strand
-#' strand <- trans.tx0.df[, "strand"]
-#' strand <- as.character(strand)
-#' # blockSizes
-#' blockSizes <- trans.tx0.df[, "width"]
-#' # targetStart
-#' targetStart <- trans.tx0.df[, "start"]
-#'
-#' trans.list <- vector2GRangesList(RefSeqID, targetName, strand,
-#' blockSizes, targetStart)
 
 vector2GRangesList <- function(RefSeqID, targetName, strand, blockSizes, targetStart
 ){

@@ -17,19 +17,3 @@ A \code{list} object.
 \description{
 This function makes sure the two input region sets are in the correct format required by RgnTX evaluation functions.
 }
-\examples{
-library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-trans.ids <- c("170", "782", "974", "1364", "1387")
-A <- randomizeTx(
-    txdb, trans.ids,
-    random_num = 20,
-    random_length = 100
-)
-B <- randomizeTx(
-    txdb, trans.ids,
-    random_num = 20,
-    random_length = 100
-)
-getFormatCorrect(A, B)
-}

@@ -19,8 +19,3 @@ A p-value and a z-score.
 \description{
 Calculate a p-value and z-score based on observed value and random evaluation values.
 }
-\examples{
-orig.ev <- 5
-random.ev <- rnorm(10, mean =2, sd = 1)
-getPvalZscore(orig.ev, random.ev)
-}

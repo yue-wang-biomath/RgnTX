@@ -1,5 +1,4 @@
 #' getPvalZscore
-#' @export getPvalZscore
 #'
 #' @description Calculate a p-value and z-score based on observed value and random evaluation values.
 #'
@@ -10,11 +9,7 @@
 #' @param pval_z Boolean. Default is FALSE. If FALSE, the p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, the p-value is calculated based on a z-test.
 #'
 #' @return A p-value and a z-score.
-#'
-#' @examples
-#' orig.ev <- 5
-#' random.ev <- rnorm(10, mean =2, sd = 1)
-#' getPvalZscore(orig.ev, random.ev)
+
 getPvalZscore <- function(orig.ev, rand.ev, pval_z = FALSE){
     # orig.ev < rand.ev
     if (orig.ev < mean(rand.ev)) {

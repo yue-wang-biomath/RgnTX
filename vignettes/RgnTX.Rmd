@@ -47,23 +47,6 @@ Currently, colocalization analysis of two genomic region sets has been widely us
 
 [RgnTX](https://github.com/yue-wang-biomath/RgnTX) makes a useful tool for transcriptome region set association analysis. In this vignette, with some simulated datasets, we show that permutation tests conducted in the genome and the transcriptome are significantly different and may return distinct results in section [2](#what-is-the-difference-between-permutation-tests-in-the-genome-and-the-transcriptome). The most core functions for conducting permutation tests and examples with real datasets are introduced in section [5](#permutation-test-function).
 
-To install this package via devtools, please use the following codes.
-```{r, eval = FALSE}
-if (!requireNamespace("devtools", quietly = TRUE))
-    install.packages("devtools")
-
-devtools::install_github("yue-wang-biomath/RgnTX", build_vignettes = TRUE)
-```
-
-To install this package via BiocManager, please use the following codes.
-
-```{r, eval = FALSE}
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("RgnTX")
-```
-
 # What is the difference between permutation tests in the genome and the transcriptome? 
 
 ## What does a permutation test do?
@@ -116,6 +99,25 @@ knitr::include_graphics("figures/section2.4.png")
 ```
 
 As the results show, permutations over different genome and transcriptome space return distinct results. A small number of overlaps are observed in the transcriptome (the last case), which is not surprising due to the existence of multiple isoform transcripts. Interestingly, the results from exonic DNA and mRNA (projected to genome) are also different, which is due to exons used at different frequencies by isoform transcripts. These results suggest that the permutation of heterogeneous transcriptome elements can be substantially more complex than genome-based elements. Genome-based methods are not appropriate to analyze transcriptome elements. That’s why we develop [RgnTX](https://github.com/yue-wang-biomath/RgnTX) to do this.
+
+# Installation
+
+To install this package via devtools, please use the following codes.
+```{r, eval = FALSE}
+if (!requireNamespace("devtools", quietly = TRUE))
+    install.packages("devtools")
+
+devtools::install_github("yue-wang-biomath/RgnTX", build_vignettes = TRUE)
+```
+
+To install this package via BiocManager, please use the following codes.
+
+```{r, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("RgnTX")
+```
 
 # Feature/region format in RgnTX
 
