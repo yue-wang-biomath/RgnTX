@@ -16,4 +16,4 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install("RgnTX")
 ```
 
-To view the documentation of RgnTX, type `browseVignettes("RgnTX")` after installation.
+To view the documentation of RgnTX, please type `browseVignettes("RgnTX")` after installation.
