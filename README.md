@@ -1,7 +1,7 @@
 # RgnTX
 
 ## Instruction
--The Bioconductor package RgnTX allows user-defined restriction of transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations. 
+RgnTX is an R/Bioconductor tool for the colocalization analysis of transcriptome elements with permutation tests. Different from existing approaches, RgnTX directly takes advantage of transcriptome annotation, and offers high flexibility in the null model to simulate realistic transcriptome-wide background, such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations. 
 
 - Function `shiftedZScoreTx` is updated supprting the shifting regions of interest (ROI) over mRNA space (exons). 
 - Function `shiftExonTx` is updated for picking regions over mRNA space (exons).
