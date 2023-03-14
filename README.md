@@ -283,7 +283,7 @@ The function `plotPermResults` accepts results from the output of the `shiftedZS
 p1 <- plotShiftedZScoreTx(shiftedZScoresTx_results)
 ```
 
-<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.jpg' width = '500px'> 
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.jpg' width = '400px'> 
 
 When more m6A sites and larger window are involved, results are shown as follows.
 
@@ -302,7 +302,7 @@ shiftedZScoresTx_results2 <- shiftedZScoreTx(permTestTx_results2,txdb,
 p2 <- plotShiftedZScoreTx(shiftedZScoresTx_results2)
 ```
 
-<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.1.jpg' width = '500px'> 
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.1.jpg' width = '400px'> 
 
 ## 5. Multiple hypothesis tests with Benjamini-Hochberg correction
 
@@ -312,4 +312,12 @@ This function provides Benjamini-Hochberg correction for adjusting p-values from
 file <- system.file(package="RgnTX", "extdata/multi_pvals.rds")
 multi_pvals <- readRDS(file)
 adjustMultipleTesting(multi_pvals[, 1], 0.05)
+
+$Table
+   rank       pval adjusted_pval reject_H0
+1     1 0.00990099    0.01430143       Yes
+2     2 0.00990099    0.01430143       Yes
+...
+$Proportion
+[1] 0.8791209
 ```
