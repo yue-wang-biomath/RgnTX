@@ -247,7 +247,8 @@ p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
 ### - plotPermResults 
 The function `plotPermResults` accepts results from the output of the above permutation test functions and returns a figure visualizing permutation results. 
-<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section5.6.jpg' width = '100px'> 
+
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section5.6.jpg' width = '500px'> 
 
 ## 4. Shifted z-scores over transcripts
 
@@ -275,6 +276,8 @@ p1 <- plotShiftedZScoreTx(shiftedZScoresTx_results)
 
 ### - plotShiftedZScoreTx
 The function `plotPermResults` accepts results from the output of the `shiftedZScoreTx` function and returns a figure visualizing shifted z-scores. 
+
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.jpg' width = '400px'> 
 
 ## 5. Multiple hypothesis tests with Benjamini-Hochberg correction
 
