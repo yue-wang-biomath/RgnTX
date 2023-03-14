@@ -138,7 +138,6 @@ permTestTx_results <- permTestTx_customPick(RS1 = RS1,
                                             ntimes = 50,
                                             ev_function_1 = overlapCountsTx,
                                             ev_function_2 = overlapCountsTx)
-p1 <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
 
 ```
