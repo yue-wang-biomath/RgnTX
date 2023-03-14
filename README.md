@@ -46,6 +46,48 @@ width <- c(200, -200, 200, -200)
 shifted_regions <- shiftExonTx(regions, start, width)
 ```
 
+```R
+shifted_regions 
+GRangesList object of length 4:
+$`170`
+GRanges object with 2 ranges and 0 metadata columns:
+      seqnames          ranges strand
+         <Rle>       <IRanges>  <Rle>
+  [1]     chr1 3624255-3624355      +
+  [2]     chr1 3638585-3638683      +
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths
+
+$`1387`
+GRanges object with 2 ranges and 0 metadata columns:
+      seqnames            ranges strand
+         <Rle>         <IRanges>  <Rle>
+  [1]     chr1 55152023-55152121      +
+  [2]     chr1 55158097-55158197      +
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths
+
+$`4113`
+GRanges object with 2 ranges and 0 metadata columns:
+      seqnames        ranges strand
+         <Rle>     <IRanges>  <Rle>
+  [1]     chr1 881553-881641      -
+  [2]     chr1 880923-881033      -
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths
+
+$`10715`
+GRanges object with 4 ranges and 0 metadata columns:
+      seqnames            ranges strand
+         <Rle>         <IRanges>  <Rle>
+  [1]     chr2 15701312-15701351      -
+  [2]     chr2 15698704-15698758      -
+  [3]     chr2 15696907-15696943      -
+  [4]     chr2 15694195-15694262      -
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths
+```
+
 ```
 |  FUNCTION shiftExonTx(regions, start, width){
 |   FOR EACH region_i in regions
