@@ -21,7 +21,7 @@ shiftTx(regions, start, width, direction, strand)
 A \code{Granges} object.
 }
 \description{
-Calculate positional shifting over transcript regions. This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
+Calculate positional shifting over transcript regions.
 }
 \examples{
 # Take five transcripts.

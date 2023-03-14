@@ -690,10 +690,7 @@ p1
 ```
 
 ```{r Fig14, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m6A and stop codon regions with window 500 and step 50"}
-file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results.rds")
-shiftedZScoreTx_results <- readRDS(file)
-p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
-p1
+knitr::include_graphics("figures/section9.jpg")
 ```
 
 We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m6A features. 

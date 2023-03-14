@@ -1,7 +1,7 @@
 #' Shift regions over transcripts
 #' @export shiftExonTx
 #' @importFrom GenomicRanges GRangesList
-#' @description Shift regions over transcripts (exons). This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
+#' @description Shift regions over transcripts (exons).
 #'
 #' @usage shiftExonTx(regions, start, width)
 #'

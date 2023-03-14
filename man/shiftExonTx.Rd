@@ -17,7 +17,7 @@ shiftExonTx(regions, start, width)
 A \code{GRangesList} object.
 }
 \description{
-Shift regions over transcripts (exons). This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
+Shift regions over transcripts (exons).
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)

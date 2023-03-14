@@ -1,7 +1,7 @@
 #' Shift over transcripts
 #' @export shiftTx
 #'
-#' @description Calculate positional shifting over transcript regions. This function accepts a feature set and outputs a region set from it. Each output region is from each input feature.
+#' @description Calculate positional shifting over transcript regions.
 #'
 #' @usage shiftTx(regions, start, width, direction, strand)
 #'
