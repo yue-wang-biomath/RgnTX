@@ -32,46 +32,39 @@ getreduceSpace = function(regions.trans){
 
     names(regions.trans) <- as.character(unique(regions.group))
     return(regions.trans)}
-regions.exons <- exonsBy(txdb)
-n_perm <- 100
-
+    regions.exons <- exonsBy(txdb)
+    n_perm <- 100
+    N <- 100
+    # case 1
     m6A_sites_data <- readRDS("~/RgnTX/inst/extdata/m6A_sites_data.rds")
     regions1.A = m6A_sites_data[1:100]
     regions1.D <- randomizeFeaturesTxIA(regions1.A, txdb, N = n_perm)
     trans.info <- getTransInfo(regions1.A, txdb)
     trans.id <- trans.info[, 'trans_ID']
     regions1.C <- getStopCodon(trans.id, txdb)
-    #regions1.C <- readRDS("D:/RgnTX/RgnTX2022v.2/boxplot2/data/regions1.C.rds")
     orig.ev1 <- overlapCountsTxIA(regions1.A, regions1.C, txdb)
     random.ev1 <- lapply(regions1.D, function(x){
         return(overlapCountsTx(x, regions1.C))})
     random.ev1 <- unlist(random.ev1)
-    #random.ev1 <- readRDS("D:/RgnTX/RgnTX2022v.2/boxplot2/data/random.ev1.rds")
 
-    # boxplot 2
+    # case 2
     #regions.exons <- exonsBy(txdb)
     #trans.id <- names(regions.exons)
     #regions2.C <- getStopCodon(trans.id, txdb)
-    regions2.C <- readRDS("~/RgnTX_data/boxplot2/regions2.C.rds")
     orig.ev2 <- overlapCountsTxIA(regions1.A, regions2.C, txdb)
-
     trans.id <- names(regions.exons)
     regions2.D = list()
-
 
     for (i in 1:N) {
         trans.id.sample <- sample(trans.id, length(regions1.A), replace = TRUE)
         regions2.D.sample <- regions.exons[(trans.id.sample)]
         regions2.D[i] <- randomizeTransByOrder(regions2.D.sample, 2)
     }
-
-    # regions2.D <- readRDS("D:/RgnTX/RgnTX2022v.2/boxplot2/data/regions2.D.rds")
     random.ev2 <- lapply(regions2.D, function(x){
         return(overlapCountsTx(x, regions2.C))})
     random.ev2 <- unlist(random.ev2)
-    #random.ev2 <- readRDS("D:/RgnTX/RgnTX2022v.2/boxplot2/data/random.ev2.rds")
 
-    # boxplot 3
+    # case 3
     trans.info <- getTransInfo(regions1.A, txdb)
     trans.id <- trans.info[, 'trans_ID']
     regions3.D <- regions.exons[unique(trans.id)]
@@ -88,23 +81,19 @@ n_perm <- 100
         regions3.D.reduced.sample <- regions3.D.reduced[index.sample]
         regions3.F[i] <- randomizeTransByOrder(regions3.D.reduced.sample, 2)
     }
-    #regions3.F <- readRDS('D:/RgnTX/RgnTX2022v.2/boxplot2/data/regions3.F.rds')
 
     regions3.C <- getreduceSpace(regions1.C)
-    #regions3.C <- readRDS('D:/RgnTX/RgnTX2022v.2/boxplot2/data/regions3.C.rds')
     regions3.C <- unlist(regions3.C)
-
     orig.ev3 <- numOverlaps(regions1.A, regions3.C)
 
     random.ev3 <- lapply(regions3.F, function(x){
         return(numOverlaps(x, regions3.C))})
     random.ev3 <- unlist(random.ev3)
 
-    # boxplot 4
+    # case 4
     regions4.C <- getreduceSpace(regions2.C)
     regions4.C <- unlist(regions4.C)
     orig.ev4 <- numOverlaps(regions1.A, regions4.C)
-
     trans.id <- names(regions.exons)
     regions4.F = list()
 
