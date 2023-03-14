@@ -198,7 +198,7 @@ permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
                                               txdb = txdb,
                                               type = "mature",
                                               customPick_function = getStopCodon,
-                                              ntimes = 1)
+                                              ntimes = 50)
 shiftedZScoresTx_results <- shiftedZScoreTx(permTestTx_results,txdb,
                                            type = 'mature',
                                            window = 500,
