@@ -1,5 +1,12 @@
 # RgnTX
 
+## Instruction
+-The Bioconductor package RgnTX allows user-defined restriction of transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations. 
+
+- Function `shiftedZScoreTx` is updated supprting the shifting regions of interest (ROI) over mRNA space (exons). 
+- Function `shiftExonTx` is updated for pick regions over mRNA space (exons).
+- Files in /inst/extdata/Review are updated for review purpose only.
+
 ## 1. Install
 To install this package via devtools, please use the following codes.
 ```R
@@ -36,13 +43,14 @@ shifted_regions <- shiftExonTx(regions, start, width)
 ```
 
 ```
- IF this_is_True 
-|   do_this  
-|   ELSE
-|   select B from input  
-|   do something whith input  
-|     FOR EACH  a_i in B   
-|     do something with a_i
+|  FUNCTION shiftExonTx(regions, start, width){
+|   FOR EACH region_i in regions
+|       Take the start_i in start
+|       Take the width_i in width
+|       region_target_i <- the region starting from start_i has width_i over region_i
+|   ENDFOR
+|   RETURN region_target
+|  }
 ```
 
 ### - randomizeTx
