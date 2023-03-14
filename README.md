@@ -47,7 +47,7 @@ shifted_regions <- shiftExonTx(regions, start, width)
 ```
 
 ```R
-shifted_regions 
+> shifted_regions 
 GRangesList object of length 4:
 $`170`
 GRanges object with 2 ranges and 0 metadata columns:
@@ -86,6 +86,13 @@ GRanges object with 4 ranges and 0 metadata columns:
   [4]     chr2 15694195-15694262      -
   -------
   seqinfo: 2 sequences from an unspecified genome; no seqlengths
+  
+ > width(shifted_regions)
+IntegerList of length 4
+[["170"]] 101 99
+[["1387"]] 99 101
+[["4113"]] 89 111
+[["10715"]] 40 55 37 68
 ```
 
 ```
