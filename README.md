@@ -4,7 +4,8 @@
 -The Bioconductor package RgnTX allows user-defined restriction of transcriptome areas during the shuffling, and therefore offers high flexibility in the null model to simulate the realistic transcriptome-wide background such as the complex alternative splicing patterns. The setting of null models (randomization) and colocalization measures can be independently chosen from many pre-defined choices when performing statistical colocalization analysis. Importantly, RgnTX also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations. 
 
 - Function `shiftedZScoreTx` is updated supprting the shifting regions of interest (ROI) over mRNA space (exons). 
-- Function `shiftExonTx` is updated for pick regions over mRNA space (exons).
+- Function `shiftExonTx` is updated for picking regions over mRNA space (exons).
+- The ReadMe file is updated providing basic examples and corresponding pseudocodes.
 - Files in /inst/extdata/Review are updated for review purpose only.
 
 ## 1. Install
@@ -47,9 +48,9 @@ shifted_regions <- shiftExonTx(regions, start, width)
 |   FOR EACH region_i in regions
 |       Take the start_i in start
 |       Take the width_i in width
-|       region_target_i <- the region starting from start_i has width_i over region_i
+|       Extract target_region_i: the region starting from start_i has width_i in region_i
 |   ENDFOR
-|   RETURN region_target
+|   RETURN target_region
 |  }
 ```
 
@@ -63,8 +64,29 @@ randomResults <- randomizeTx(txdb = TxDb.Hsapiens.UCSC.hg19.knownGene,
                              random_length = 100)
 ```
 
+```
+|  FUNCTION randomizeTx(txdb, trans_ids, random_num, random_length, type, N){
+|   FOR j in 1 to N
+|
+|       FOR i in 1 to random_num
+|       Take a random element in trans_ids as trans_id_i
+|       Take the i-th element in random_length as random_length_i
+|
+|           IF type is one from "mature"/"full"/"fiveUTR"/"CDS"/"threeUTR"
+|               region_i <- Pick corresponding type of region from txdb that has transcript id trans_id_i 
+|           ENDIF
+|
+|       Randomly pick ramdom_region_i: a random region on the transcript region_i having width random_length_i
+|       ENDFOR
+|       Obtain ramdom_region: collection of ramdom_region_i
+|
+|   ENDFOR
+|   Obtain ramdom_region_list: collection of ramdom_region
+|   RETURN ramdom_region_list
+|  }
+```
+
 ## 3. Quick start
-### - permTestTx
 
 ### - permTestTx_customPick
 ```R
@@ -85,6 +107,8 @@ permTestTx_results <- permTestTx_customPick(RS1 = RS1,
                                             ev_function_2 = overlapCountsTx)
 p1 <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
+
+
 
 ### - permTestTxIA_customPick
 ```R
