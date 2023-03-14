@@ -1,4 +1,3 @@
-library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 txdb = TxDb.Hsapiens.UCSC.hg19.knownGene
 
 getreduceSpace = function(regions.trans){
