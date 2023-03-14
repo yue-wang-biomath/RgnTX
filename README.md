@@ -50,6 +50,8 @@ shifted_regions <- shiftExonTx(regions, start, width)
 |       Take the width_i in width
 |       Extract target_region_i: the region starting from start_i has width_i in region_i
 |   ENDFOR
+|   Obtain target_region: collection of target_region_i
+|
 |   RETURN target_region
 |  }
 ```
@@ -82,6 +84,7 @@ randomResults <- randomizeTx(txdb = TxDb.Hsapiens.UCSC.hg19.knownGene,
 |
 |   ENDFOR
 |   Obtain ramdom_region_list: collection of ramdom_region
+|
 |   RETURN ramdom_region_list
 |  }
 ```
@@ -108,7 +111,42 @@ permTestTx_results <- permTestTx_customPick(RS1 = RS1,
 p1 <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
 
-
+```
+|  FUNCTION permTestTx_customPick(RS1, txdb, customPick_function, ntimes, ev_function_1, ev_function_2){
+|
+|   # RS means region set
+|   # ROI denotes regions of interest
+|   
+|   # Obtain ROI 
+|   FOR i in 1 to LENGTH(RS1)  
+|       Take the i-th element in RS1 as RS1_i 
+|       customPick_function takes RS1_i as input and returns ROI_i
+|   ENDFOR
+|   Obtain ROI: collection of ROI_i
+|
+|   # Obtain the observed overlap
+|   observed_overlap: ev_function_1 calculates overlaps between RS and ROI
+|
+|   # Obtain random_region_list and random_overlap_list
+|   FOR j in 1 to ntimes
+|       FOR i in 1 to LENGTH(RS1)  
+|           Take the i-th element in RS1 as RS1_i 
+|           Randomly pick random_region_i: a randomized region of RS1_i on the transcript where RS1_i is located.
+|       ENDFOR
+|       Obtain random_region: collection of random_region_i
+|       random_overlap: ev_function_2 calculates overlaps between RS and random_region
+|   ENDFOR   
+|       Obtain random_region_list: collection of random_region
+|       Obtain random_overlap_list: collection of random_overlap
+|
+|   # Obtain pvalue and zscore       
+|   FOR j in 1 to ntimes
+|       Calculate pvalue and zscore based on random_overlap_list and observed_overlap
+|   ENDFOR
+|
+|   RETURN ramdom_region_list observed_overlap, random_overlap_list, pvalue, zscore
+|  }
+```
 
 ### - permTestTxIA_customPick
 ```R
