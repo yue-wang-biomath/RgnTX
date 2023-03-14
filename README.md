@@ -243,10 +243,13 @@ permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
                                        ntimes = 50,
                                        ev_function_1 = overlapCountsTxIA,
                                        ev_function_2 = overlapCountsTx)
-p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
+
 ### - plotPermResults 
 The function `plotPermResults` accepts results from the output of the above permutation test functions and returns a figure visualizing permutation results. 
+```R
+p_a <- plotPermResults(permTestTx_results, binwidth = 1)
+```
 
 <img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section5.6.jpg' width = '500px'> 
 
@@ -271,13 +274,35 @@ shiftedZScoresTx_results <- shiftedZScoreTx(permTestTx_results,txdb,
                                            window = 500,
                                            step = 50,
                                            ev_function_1 = overlapCountsTxIA)
-p1 <- plotShiftedZScoreTx(shiftedZScoresTx_results)
 ```
 
 ### - plotShiftedZScoreTx
 The function `plotPermResults` accepts results from the output of the `shiftedZScoreTx` function and returns a figure visualizing shifted z-scores. 
 
-<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.jpg' width = '400px'> 
+```R
+p1 <- plotShiftedZScoreTx(shiftedZScoresTx_results)
+```
+
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.jpg' width = '500px'> 
+
+When more m6A sites and larger window are involved, results are shown as follows.
+
+```R
+RS1 <- m6A_sites_data[1:500]
+permTestTx_results2 <- permTestTxIA_customPick(RS1 = RS1,
+                                              txdb = txdb,
+                                              type = "mature",
+                                              customPick_function = getStopCodon,
+                                              ntimes = 50)
+shiftedZScoresTx_results2 <- shiftedZScoreTx(permTestTx_results2,txdb,
+                                           type = 'mature',
+                                           window = 800,
+                                           step = 50,
+                                           ev_function_1 = overlapCountsTxIA)
+p2 <- plotShiftedZScoreTx(shiftedZScoresTx_results2)
+```
+
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section9.1.jpg' width = '500px'> 
 
 ## 5. Multiple hypothesis tests with Benjamini-Hochberg correction
 
