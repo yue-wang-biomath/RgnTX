@@ -1,3 +1,7 @@
 Changes in version 0.99.0 (2022-04-12)
 + Submitted to Bioconductor
 
+Changes in version 1.0.0 (2023-03-13)
++ Updated shiftedZScoreTx
++ Updated shiftExonTx
++ Updated Utility
