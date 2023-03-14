@@ -216,5 +216,5 @@ p1 <- plotShiftedZScoreTx(shiftedZScoresTx_results)
 ```R
 file <- system.file(package="RgnTX", "extdata/multi_pvals.rds")
 multi_pvals <- readRDS(file)
-adjustMultipleTesting(multi_pvals, 0.05)
+adjustMultipleTesting(multi_pvals[, 1], 0.05)
 ```
