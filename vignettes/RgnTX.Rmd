@@ -693,7 +693,7 @@ p1
 knitr::include_graphics("figures/section9.jpg")
 ```
 
-We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m6A features. 
+We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of stop codons. The stop codon region tested here is formed by the last 100 nt CDS and the first 100 nt 3'UTR. As shown in Fig. \@ref(fig:Fig14), we can see m6A sites are enriched more on 3'UTR than on CDS, since the peak is deviated to the right (3') direction. 
 
 # Other useful functions 
 
