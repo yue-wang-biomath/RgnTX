@@ -17,12 +17,14 @@
 #' library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 #' txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 #' exons.tx0 <- exonsBy(txdb)
-#' trans.ids <- sample(names(exons.tx0), 500)
+#' trans.ids <- sample(names(exons.tx0), 3)
 #' regions.A <- exons.tx0[trans.ids]
-#' RS <- randomizeTransByOrder(regions.A, random_length = 20)
+#' RS <- randomizeTransByOrder(regions.A, random_length = 200)
 randomizeTransByOrder <-
     function(regions_A,
              random_length = 20){
+
+
         random.length <- random_length
         regions.A <- regions_A
         A.widths <- width(regions.A)
@@ -71,6 +73,8 @@ randomizeTransByOrder <-
                                   strand = '+')
 
             B.p.exons <- extractRegions(regions_A = regions.p, B.p, strand = '+')
+            randomResults <- B.p.exons
+
         }else{
             B.p.exons <- c()
         }
@@ -101,11 +105,14 @@ randomizeTransByOrder <-
                                   strand = '-')
 
             B.n.exons <- extractRegions(regions_A = regions.n, B.n, strand = '-')
-            B.n.exons$group <- B.n.exons$group + max(B.p.exons$group)
-        }else{
-            B.n.exons <-c()
+            if(length(B.p.exons) != 0){
+                B.n.exons$group <- B.n.exons$group + max(B.p.exons$group)
+                randomResults <- c(B.p.exons, B.n.exons)
+
+            }else{
+                randomResults <- B.n.exons
+
+            }
         }
-        randomResults <- c(B.p.exons, B.n.exons)
-        randomResults <- GRanges2GRangesList(randomResults)
-        return(randomResults)
+        return(GRanges2GRangesList(randomResults))
     }

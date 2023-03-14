@@ -24,5 +24,5 @@ Calculate adjusted pvalues of multiple testing.
 \examples{
 file <- system.file(package="RgnTX", "extdata/multi_pvals.rds")
 multi_pvals <- readRDS(file)
-adjustMultipleTesting(multi_pvals, 0.05)
+adjustMultipleTesting(multi_pvals[, 1], 0.05)
 }

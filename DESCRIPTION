@@ -8,12 +8,13 @@ Description: RgnTX allows the integration of transcriptome annotations so as to 
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 biocViews: AlternativeSplicing, Sequencing, RNASeq, MethylSeq, Transcription, SplicedAlignment
 Imports: 
     GenomeInfoDb,
     GenomicFeatures,
     GenomicRanges,
+    BiocGenerics,
     ggplot2,
     graphics,
     IRanges,

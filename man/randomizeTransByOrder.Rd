@@ -21,9 +21,9 @@ This function receives a \code{GRangesList} object and picks a random region wit
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 exons.tx0 <- exonsBy(txdb)
-trans.ids <- sample(names(exons.tx0), 500)
+trans.ids <- sample(names(exons.tx0), 3)
 regions.A <- exons.tx0[trans.ids]
-RS <- randomizeTransByOrder(regions.A, random_length = 20)
+RS <- randomizeTransByOrder(regions.A, random_length = 200)
 }
 \seealso{
 \code{\link{randomizeTx}}, \code{\link{randomizeFeaturesTx}}, \code{\link{randomizeFeaturesTxIA}}

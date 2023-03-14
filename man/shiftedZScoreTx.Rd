@@ -2,15 +2,17 @@
 % Please edit documentation in R/shiftedZScoreTx.R
 \name{shiftedZScoreTx}
 \alias{shiftedZScoreTx}
-\title{Calculate shifted z scores}
+\title{Calculate shifted z scores over transcripts}
 \usage{
-shiftedZScoreTx(permTestTx_results = NULL, txdb = NULL,
+shiftedZScoreTx(permTestTx_results = NULL, txdb = NULL, type = "normal",
 window = 200, step = 20, ev_function_1 = overlapCountsTx, ...)
 }
 \arguments{
 \item{permTestTx_results}{A \code{permTestTx.results} object.}
 
 \item{txdb}{A TxDb object.}
+
+\item{type}{If type is "mature", regions of interest will be shifted over the mature mRNA space according to the input txdb object. Otherwise ROS will be shifted over genomic space.}
 
 \item{window}{The window of the whole shifting.}
 
@@ -21,7 +23,7 @@ window = 200, step = 20, ev_function_1 = overlapCountsTx, ...)
 \item{...}{Any additional parameters needed.}
 }
 \value{
-A list object, which is defined to be \code{shitedZScore.results} class. It contains the following items:
+A list object, which is defined to be \code{shiftedZScoreTx.results} class. It contains the following items:
 \itemize{
 \item \bold{\code{shifted.z.scores:}} Standard z-scores after shifting.
 \item \bold{\code{window:}} Window of the whole shifting.
@@ -30,25 +32,28 @@ A list object, which is defined to be \code{shitedZScore.results} class. It cont
 }
 }
 \description{
-Calculate shifted z scores for permutation test results.
+Calculate shifted z scores for permutation test results. It provides mode of shifting regions of interest over mRNA space.
 }
 \details{
 see examples in \code{\link{plotShiftedZScoreTx}}
 }
 \examples{
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
-txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-file <- system.file(package="RgnTX", "extdata/m6A_sites_data.rds")
+txdb = TxDb.Hsapiens.UCSC.hg19.knownGene
+file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
-RS1 <- m6A_sites_data[1:500]
+RS1 <- m6A_sites_data[1:100]
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
-                                        txdb = txdb,
-                                        customPick_function = getStopCodon,
-                                        ntimes = 5)
-shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, txdb = txdb,
-                                        window = 2000,
-                                        step = 200,
-                                        ev_function_1 = overlapCountsTxIA)
+                                              txdb = txdb,
+                                              type = "mature",
+                                              customPick_function = getStopCodon,
+                                              ntimes = 1)
+shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results,txdb,
+                                           type = 'mature',
+                                           window = 500,
+                                           step = 50,
+                                           ev_function_1 = overlapCountsTxIA)
 }
 \seealso{
 \code{\link{plotShiftedZScoreTx}}

@@ -68,8 +68,10 @@ calculateShift <-
 
             reg3.width <- max(width.cumsum[index.reg.1])
             reg4.width <- reg3.width - reg2.width
-            end.pos <- max(A.end[index.reg][index.reg.1]) - reg4.width + 1
-            end.pos[reg2.width > max(width.cumsum)] <- max(A.end[index.reg][index.reg.1])[reg2.width > max(width.cumsum)]
+            rightmost <- max(A.end[index.reg][index.reg.1])
+            end.pos <- rightmost - reg4.width + 1
+            end.pos[reg2.width > max(width.cumsum)] <-rightmost[reg2.width > max(width.cumsum)]
+            end.pos[rightmost < end.pos] <- rightmost[rightmost < end.pos]
 
             R <- GRanges(
                 seqnames = Rle(unlist(unique(seqnames(regions.A)))),
@@ -106,8 +108,10 @@ calculateShift <-
 
             reg3.width <- max(width.cumsum[index.reg.1])
             reg4.width <- reg3.width - reg2.width
-            end.pos <- min(A.start[index.reg][index.reg.1]) + reg4.width - 1
-            end.pos[reg2.width > max(width.cumsum)] <- min(A.start[index.reg][index.reg.1])[reg2.width > max(width.cumsum)]
+            rightmost <- min(A.start[index.reg][index.reg.1])
+            end.pos <-  rightmost + reg4.width - 1
+            end.pos[reg2.width > max(width.cumsum)] <- rightmost[reg2.width > max(width.cumsum)]
+            end.pos[rightmost > end.pos] <- rightmost[rightmost > end.pos]
 
             R <- GRanges(
                 seqnames = Rle(unlist(unique(seqnames(regions.A)))),
@@ -145,8 +149,10 @@ calculateShift <-
 
             reg3.width <- max(width.cumsum[index.reg.1])
             reg4.width <- reg3.width - reg2.width
-            end.pos <- min(A.start[index.reg][index.reg.1]) + reg4.width - 1
-            end.pos[reg2.width > max(width.cumsum)] <- min(A.start[index.reg][index.reg.1])[reg2.width > max(width.cumsum)]
+            leftmost <- min(A.start[index.reg][index.reg.1])
+            end.pos <- leftmost + reg4.width - 1
+            end.pos[reg2.width > max(width.cumsum)] <- leftmost[reg2.width > max(width.cumsum)]
+            end.pos[leftmost > end.pos] <- leftmost[leftmost > end.pos]
 
 
             R <- GRanges(
@@ -188,9 +194,11 @@ calculateShift <-
             }))
             reg3.width <- max(width.cumsum[index.reg.1])
             reg4.width <- reg3.width - reg2.width
-            end.pos <- max(A.end[index.reg][index.reg.1]) - reg4.width + 1
+            leftmost <- max(A.end[index.reg][index.reg.1])
+            end.pos <- leftmost - reg4.width + 1
+            end.pos[reg2.width > max(width.cumsum)] <- leftmost[reg2.width > max(width.cumsum)]
+            end.pos[leftmost < end.pos] <- leftmost[leftmost < end.pos]
 
-            end.pos[reg2.width > max(width.cumsum)] <- max(A.end)[reg2.width > max(width.cumsum)]
 
             R <- GRanges(
                 seqnames = Rle(unlist(unique(seqnames(regions.A)))),

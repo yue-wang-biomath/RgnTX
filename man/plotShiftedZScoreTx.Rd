@@ -4,10 +4,10 @@
 \alias{plotShiftedZScoreTx}
 \title{Plot shifted z scores}
 \usage{
-plotShiftedZScoreTx(shitedZScoresTx_results)
+plotShiftedZScoreTx(shiftedZScoresTx_results)
 }
 \arguments{
-\item{shitedZScoresTx_results}{A \code{shitedZScoreTx.results} object.}
+\item{shiftedZScoresTx_results}{A \code{shiftedZScoreTx.results} object.}
 }
 \value{
 A plot.
@@ -16,7 +16,7 @@ A plot.
 Plot shifted z scores for permutation test results.
 }
 \examples{
-file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results1.rds")
+file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results.rds")
 shiftedZScoreTx_results <- readRDS(file)
 p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 p1

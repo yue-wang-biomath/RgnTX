@@ -5,7 +5,7 @@
 \title{Perform permutation test}
 \usage{
 permTestTx_customAll(RSL = NULL, RS1 = NULL, RS2 = NULL,
-ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE, ...)
+ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_t = FALSE, ...)
 }
 \arguments{
 \item{RSL}{Randomized region sets of \code{RS1}. It should be a list object and each element should be in the \code{GRanges} or \code{GRangesList} format.}
@@ -18,7 +18,7 @@ ev_function_1 = overlapCountsTx, ev_function_2 = overlapCountsTx, pval_z = FALSE
 
 \item{ev_function_2}{Evaluation function defines what statistic to be tested between each element in RSL and RS2. Default is  \code{overlapCountsTx}.}
 
-\item{pval_z}{Boolean. Default is FALSE. If FALSE, p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, p-value is calculated based on a z-test.}
+\item{pval_t}{Boolean. Default is FALSE. If FALSE, p-value is calculated based on the number of random evaluations is larger or less than the initial evaluation. If TRUE, p-value is calculated based on a t-test.}
 
 \item{...}{Any additional parameters needed.}
 }

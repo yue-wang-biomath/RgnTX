@@ -1,7 +1,8 @@
 #' getStopCodon
 #' @export getStopCodon
 #' @description Get stop codon regions for input transcripts. This is an example of customPick function.
-#'
+#' @importFrom IRanges reduce
+#' @importFrom GenomicRanges GRangesList
 #' @usage getStopCodon(trans_ids, txdb, ...)
 #'
 #' @param trans_ids A character object containing transcript ids.
@@ -20,25 +21,28 @@ getStopCodon <- function(trans_ids, txdb, ...) {
 
     dist <- 100
     trans.id <- as.character(trans_ids)
+    trans.id <- unique(trans.id) ###
     cds.tx0 <- cdsBy(txdb, use.names = FALSE)
     threeUTR.tx0 <- threeUTRsByTranscript(txdb, use.names = FALSE)
 
     # The stop codon region is defined to be the first 100 nt regions
     # of 3'UTR and the last 100 nt regions of CDS in mRNAs.  The last
     # 100 nt regions of CDS.
+
     cds.names <- as.character(intersect(names(cds.tx0), trans.id))
     cds <- cds.tx0[cds.names]
 
     # separate p/n strand
     cds.strand <- data.frame(unique(strand(cds)))[, "value"]
-    names.p <- cds.names[which(cds.strand == "+")]
-    names.n <- cds.names[which(cds.strand == "-")]
+    names.p <- cds.names[cds.strand == "+"]
+    names.n <- cds.names[cds.strand == "-"]
 
     # p.strand
     if (length(names.p) != 0) {
         cds.p <- cds.tx0[names.p]
         cds.p.start <- as.numeric(max(end(cds.p)))
         R.p.l.exons <- shiftTx(cds.p, cds.p.start, dist, direction = "left", strand = "+")
+        R.p.l.exons$group <- unlist(lapply(R.p.l.exons$transcriptsHits, function(x){return(which(trans.id == x))}))
     } else {
         R.p.l.exons <- c()
     }
@@ -48,7 +52,7 @@ getStopCodon <- function(trans_ids, txdb, ...) {
         cds.n <- cds.tx0[names.n]
         cds.n.start <- as.numeric(min(start(cds.n)))
         R.n.l.exons <- shiftTx(cds.n, cds.n.start, dist, direction = "left", strand = "-")
-
+        R.n.l.exons$group <- unlist(lapply(R.n.l.exons$transcriptsHits, function(x){return(which(trans.id == x))}))
     } else {
         R.n.l.exons <- c()
     }
@@ -67,6 +71,7 @@ getStopCodon <- function(trans_ids, txdb, ...) {
         threeUTR.p <- threeUTR.tx0[names.p]
         threeUTR.p.start <- as.numeric(min(start(threeUTR.p)))
         R.p.r.exons <- shiftTx(threeUTR.p, threeUTR.p.start, dist, direction = "right", strand = "+")
+        R.p.r.exons$group <- unlist(lapply(R.p.r.exons$transcriptsHits, function(x){return(which(trans.id == x))}))
 
     } else {
         R.p.r.exons <- c()
@@ -77,29 +82,24 @@ getStopCodon <- function(trans_ids, txdb, ...) {
         threeUTR.n <- threeUTR.tx0[names.n]
         threeUTR.n.start <- as.numeric(max(end(threeUTR.n)))
         R.n.r.exons <- shiftTx(threeUTR.n, threeUTR.n.start, dist, direction = "right", strand = "-")
+        R.n.r.exons$group <- unlist(lapply(R.n.r.exons$transcriptsHits, function(x){return(which(trans.id == x))}))
 
     } else {
         R.n.r.exons <- c()
     }
 
     # rearrange
-    R.stop.codon.p <- c(R.p.l.exons, R.p.r.exons)
-    R.stop.codon.n <- c(R.n.l.exons, R.n.r.exons)
-
+    R.stop.codon <- c(R.p.l.exons, R.p.r.exons, R.n.l.exons, R.n.r.exons)
+    groupall <- R.stop.codon$group
+    groupindex <-unlist(lapply(unique(groupall), function(x){return(which(groupall == x))}))
     # stop codon
-    R.stop.codon.n$group <- R.stop.codon.n$group + max(R.stop.codon.p$group)
-    if (length(R.stop.codon.p$group) != 0 && length(R.stop.codon.n$group) !=
-        0) {
-        R.stop.codon <- c(R.stop.codon.p, R.stop.codon.n)
-    } else {
-        if (length(R.stop.codon.p$group) != 0) {
-            R.stop.codon <- R.stop.codon.p
-        }
-        if (length(R.stop.codon.n$group) != 0) {
-            R.stop.codon <- R.stop.codon.n
-        }
-    }
+    R.stop.codon <- R.stop.codon[groupindex]
+    groupname <- R.stop.codon$group
+    R.stop.codon$group <- unlist(lapply(1:length(unique(groupname)),
+                                        function(x){return(replicate(length(which(groupname == unique(groupname)[x])), x))}))
 
     R.stop.codon <- GRanges2GRangesList(R.stop.codon)
+    R.stop.codon <- lapply(R.stop.codon, reduce)
+    R.stop.codon <- GRangesList(R.stop.codon)
     return(R.stop.codon)
 }

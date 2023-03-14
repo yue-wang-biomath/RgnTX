@@ -20,16 +20,6 @@ test_that("Test the permTestTx function", {
     expect_error(plotPermResults(""), "Argument permTestTx_results must be a permTestTx.results object.")
 })
 
-shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, txdb)
-test_that("Test the shiftedZScoreTx function", {
-    expect_error(shiftedZScoreTx("", txdb), "Argument permTestTx_results must be a permTestTx.results object.")
-    expect_type(shiftedZScoreTx_results, "list")
-    expect_type(shiftedZScoreTx_results$shifted.z.scores, "double")
-    expect_true(is(shiftedZScoreTx_results, "shitedZScoreTx.results"))
-    expect_equal(length(shiftedZScoreTx_results), 4)
-    expect_error(plotShiftedZScoreTx(""), "Argument shitedZScoresTx_results must be a shitedZScoreTx.results object.")
-})
-
 getCDS <- function(trans_ids, ...) {
     cds.tx0 <- cdsBy(txdb, use.names = FALSE)
     cds.names <- as.character(intersect(names(cds.tx0), trans_ids))

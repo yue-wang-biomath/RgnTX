@@ -42,8 +42,7 @@ Recent development of high-throughput sequencing technology has generated large 
 
 Currently, colocalization analysis of two genomic region sets has been widely used to infer potential interactions between corresponding biological attributes. A number of methods have been developed for this. For example, `r BiocStyle::Biocpkg("regioneR")` has been created to statistically estimate association between genomic region sets using a permutation test framework. All its functions are genome and mask-aware. However, there has been no such tools enable researchers to make data analysis and interpretation at transcriptome level. Here [RgnTX](https://github.com/yue-wang-biomath/RgnTX) is invented to fill this blank. 
 
-[RgnTX](https://github.com/yue-wang-biomath/RgnTX) extends an assumption-free permutation test framework transcriptome-wide. Different from existing approaches, [RgnTX](https://github.com/yue-wang-biomath/RgnTX) allows the integration of transcriptome annotations so as to model the complex alternative splicing patterns. Importantly, it also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
-
+Inspired by `r BiocStyle::Biocpkg("regioneR")`,[RgnTX](https://github.com/yue-wang-biomath/RgnTX) extends an assumption-free permutation test framework transcriptome-wide. Different from existing approaches, [RgnTX](https://github.com/yue-wang-biomath/RgnTX) allows the integration of transcriptome annotations so as to model the complex alternative splicing patterns. Importantly, it also supports the testing of transcriptome elements without clear isoform association, which is often the real scenario due to technical limitations.
 
 [RgnTX](https://github.com/yue-wang-biomath/RgnTX) makes a useful tool for transcriptome region set association analysis. In this vignette, with some simulated datasets, we show that permutation tests conducted in the genome and the transcriptome are significantly different and may return distinct results in section [2](#what-is-the-difference-between-permutation-tests-in-the-genome-and-the-transcriptome). The most core functions for conducting permutation tests and examples with real datasets are introduced in section [6](#permutation-test-function).
 
@@ -462,11 +461,11 @@ As Fig. \@ref(fig:Fig9) shows, it is just as we expected that the overlap number
 
 This function receives a feature set (with isoform ambiguity) and a customPick function. 
 
-Let’s take an example about testing association between N$^6$-Methyladenosine and the stop codon regions. The m$^6$A sites are derived from an miCLIP-seq dataset (Linder, et al., 2015). Due to technical restriction, it is not clear which specific transcript an m$^6$A feature is located on. 
+Let’s take an example about testing association between N$^6$-Methyladenosine and the stop codon regions. The m6A sites are derived from an miCLIP-seq dataset (Linder, et al., 2015). Due to technical restriction, it is not clear which specific transcript an m$^6$A feature is located on. 
 
 To test this association, we wrote a customPick function `getStopCodon` picking the stop codon regions of transcripts. It actually picks the last 100 nt of CDS and the first 100 nt of 3'UTR of transcripts given transcript ids. If a given transcript's CDS or 3'UTR part is less than 100 nt, the function will just pick this less than 100 nt region. This function actually uses the function `shiftTx` in section [9](#other-useful-functions) provided by [RgnTX](https://github.com/yue-wang-biomath/RgnTX) to realize these tasks.
 
-As a quick example, we feed 500 out of 9181 m$^6$A sites and this `getStopCodon` function into function `permTestTxIA_customPick`. Its default evaluation function calculates a weighted overlapping number between m$^6$A sites and the stop codon regions.
+As a quick example, we feed 500 out of 9181 m6A sites and this `getStopCodon` function into function `permTestTxIA_customPick`. Its default evaluation function calculates a weighted overlapping number between m6A sites and the stop codon regions.
 
 ```{r, eval = FALSE}
 set.seed(12345677)
@@ -493,7 +492,7 @@ p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 p_a
 ```
 
-In addition, if one wants to test the whole 9181 m$^6$A sites with the stop codon, use the following codes, which will of course take a few more minutes than the case involves less data. 
+In addition, if one wants to test the whole 9181 m6A sites with the stop codon, use the following codes, which will of course take a few more minutes than the case involves less data. 
 
 ```{r, eval = FALSE}
 set.seed(12345677)
@@ -509,10 +508,10 @@ p_b
 knitr::include_graphics("figures/section5.5.png")
 ```
 
-The weighted number of overlaps between 9181 m$^6$A sites and stop codon regions is 804.93 (calculated by default evaluation function in [6.2](#overlapcountstxia-function)), while the mean of random evaluations is 365.28 (calculated by default evaluation function in [6.1](#overlapcountstx-function)). The low p-value shows that the association being tested is statistically significant. 
+The weighted number of overlaps between 9181 m6A sites and stop codon regions is 804.93 (calculated by default evaluation function in [6.2](#overlapcountstxia-function)), while the mean of random evaluations is 365.28 (calculated by default evaluation function in [6.1](#overlapcountstx-function)). The low p-value shows that the association being tested is statistically significant. 
 
 **References**:
-Linder, B., et al. (2015) Single-nucleotide-resolution mapping of m$^6$A and m$^6$Am throughout the transcriptome. *Nat Methods*
+Linder, B., et al. (2015) Single-nucleotide-resolution mapping of m6A and m6Am throughout the transcriptome. *Nat Methods*
 **12(8)**: 767-772.
 
 ## Test with user-provided random sets
@@ -556,7 +555,7 @@ Function `overlapCountsTx` calculates the number of overlaps between two region 
 
 ## overlapCountsTxIA function
 
-Function ` overlapCountsTxIA ` accepts a feature set A (with isoform ambiguity) and a region set B (without isoform ambiguity). Each feature in A related to n$_1$ isoforms in B and overlapped with n$_2$ B regions will contribute a value of n$_2$/ n$_1$ to the total number of overlaps, which may be a non-integer. This function is used in `permTestTxIA_customPick` function (see section [6.2.2](#permtesttxia_custompick-function)), calculating a weighted number of overlaps between an m$^6$A feature set (with isoform ambiguity) and a customPick region (without isoform ambiguity). 
+Function ` overlapCountsTxIA ` accepts a feature set A (with isoform ambiguity) and a region set B (without isoform ambiguity). Each feature in A related to n_1 isoforms in B and overlapped with n_2 B regions will contribute a value of n_2/ n_1 to the total number of overlaps, which may be a non-integer. This function is used in `permTestTxIA_customPick` function (see section [6.2.2](#permtesttxia_custompick-function)), calculating a weighted number of overlaps between an m6A feature set (with isoform ambiguity) and a customPick region (without isoform ambiguity). 
 
 ## Custom evaluation function
 
@@ -659,61 +658,45 @@ p_h
 knitr::include_graphics("figures/section7.png")
 ```
 
-# Shifted Z-scores
+# Shifted Z-scores over transcripts
 
 The value of z-score represents how many standard deviations an observed value is away from the mean of random evaluations. If z-score is close to 0, observed value is about on the mean. If z-score is much larger than 0, observed value is on the positive side and far away from the mean of random evaluations. z-score can be a numerical measurement describing the strength of tested association.
 
-Here we provide a function `shiftedZScoreTx` which shifts RNA features from their original positions, applies evaluation function reassessing association and finally calculates new z-scores, what we call shifted z-scores. Calculating shifted z-scores can help us to learn if an association is specially linked to the exact position of features. Function `plotShiftedZScoreTx` can take the output of `shiftedZScoreTx` and plot different shifted z-scores when the position of features is changed. If we saw a peak at the original point in a plot of shifted z-scores, we would say that this association is closely related to the specific position of corresponding features. 
+Here we provide a function `shiftedZScoreTx` which shifts regions of interest from their original positions, applies evaluation function reassessing association and finally calculates new z-scores, what we call shifted z-scores. Calculating shifted z-scores can help us to learn if an association is specially linked to the exact position of features. Function `plotShiftedZScoreTx` can take the output of `shiftedZScoreTx` and plot different shifted z-scores when the position of features is changed. If we saw a peak at the original point in a plot of shifted z-scores, we would say that this association is closely related to the specific position of corresponding regions of interest. 
 
-Let's take the case in section [6.2.2](#permtesttxia_custompick-function) as an example. In this case, results show that m$^6$A modifications and the stop codon regions tend to have a strong positive association. Let's use `shiftedZScoreTx` to move m$^6$A features around its original position and calculate corresponding shifted z-scores after each moving.  
+To be noticed, different from the `localZScore` function in `r BiocStyle::Biocpkg("regioneR")`, `shiftZScoreTX` in this package provides mode of shifting regions of interest over mRNA space. Users access it by assigning the`type` variable a "mature" value.
+
+Let's take the case in section [6.2.2](#permtesttxia_custompick-function) as an example. In this case, results show that m6A modifications and the stop codon regions tend to have a strong positive association. Let's use `shiftedZScoreTx` to move stop codons around its original position and calculate corresponding shifted z-scores after each moving.  
 
 ```{r, eval=FALSE}
 set.seed(12345677)
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
 file <- system.file(package="RgnTX", "extdata", "m6A_sites_data.rds")
 m6A_sites_data <- readRDS(file)
-RS1 <- m6A_sites_data[1:500]
+RS1 <- m6A_sites_data[1:100]
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
-
 permTestTx_results <- permTestTxIA_customPick(RS1 = RS1,
-                                          txdb = txdb,
-                                          type = "mature",
-                                          customPick_function = getStopCodon,
-                                          ntimes = 50)
-shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, txdb = txdb,
-                                           window = 2000, 
-                                           step = 200,
+                                              txdb = txdb,
+                                              type = "mature",
+                                              customPick_function = getStopCodon,
+                                              ntimes = 1)
+shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results,txdb,
+                                           type = 'mature',
+                                           window = 500,
+                                           step = 50,
                                            ev_function_1 = overlapCountsTxIA)
 p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 p1
 ```
 
-```{r Fig14, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 2000 and step 200."}
-file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results1.rds")
+```{r Fig14, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m6A and stop codon regions with window 500 and step 50"}
+file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results.rds")
 shiftedZScoreTx_results <- readRDS(file)
 p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 p1
 ```
 
-We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m$^6$A features. 
-
-Fig. \@ref(fig:Fig15) shows the scenario if we move the features within a smaller window. To see how a smaller position shift applied to features affects the z-scores, we set smaller values for the `window` and `step` arguments. 
-
-```{r, eval=FALSE}
-set.seed(12345677)
-shiftedZScoreTx_results <- shiftedZScoreTx(permTestTx_results, 
-                                           window = 300, 
-                                           step = 10, txdb = txdb,
-                                           ev_function_1 = overlapCountsTxIA)
-p2 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
-p2
-```
-
-```{r Fig15, echo = FALSE, warning=FALSE, comment=FALSE, message= FALSE, fig.cap = "Shifted z-scores. Analysis of the association of m$^6$A and stop codon regions with window 300 and step 10."}
-file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results2.rds")
-shiftedZScoreTx_results <- readRDS(file)
-p2 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
-p2
-```
+We can see a clear peak in the center of the plot which suggests the tested association is strongly affected by the exact positions of m6A features. 
 
 # Other useful functions 
 

@@ -3,28 +3,27 @@
 #'
 #' @description Plot shifted z scores for permutation test results.
 #'
-#' @usage plotShiftedZScoreTx(shitedZScoresTx_results)
+#' @usage plotShiftedZScoreTx(shiftedZScoresTx_results)
 #'
-#' @param shitedZScoresTx_results A \code{shitedZScoreTx.results} object.
+#' @param shiftedZScoresTx_results A \code{shiftedZScoreTx.results} object.
 #'
 #' @return A plot.
 #'
 #' @seealso \code{\link{shiftedZScoreTx}}
 #' @examples
-#' file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results1.rds")
+#' file <- system.file(package="RgnTX", "extdata", "shiftedZScoreTx_results.rds")
 #' shiftedZScoreTx_results <- readRDS(file)
 #' p1 <- plotShiftedZScoreTx(shiftedZScoreTx_results)
 #' p1
 
-
-plotShiftedZScoreTx <- function(shitedZScoresTx_results) {
-    if(!is(shitedZScoresTx_results, 'shitedZScoreTx.results')){
-        stop("Argument shitedZScoresTx_results must be a shitedZScoreTx.results object.")
+plotShiftedZScoreTx <- function(shiftedZScoresTx_results) {
+    if(!is(shiftedZScoresTx_results, 'shiftedZScoreTx.results')){
+        stop("Argument shiftedZScoresTx_results must be a shiftedZScoreTx.results object.")
     }
-    shifted.z.scores <- shitedZScoresTx_results$shifted.z.scores
-    shifts <- shitedZScoresTx_results$shifts
-    window <- shitedZScoresTx_results$window
-    original.z.score <- shitedZScoresTx_results$original.z.score
+    shifted.z.scores <- shiftedZScoresTx_results$shifted.z.scores
+    shifts <- shiftedZScoresTx_results$shifts
+    window <- shiftedZScoresTx_results$window
+    original.z.score <- shiftedZScoresTx_results$original.z.score
     data <- data.frame(shifts = shifts, shifted.z.scores = shifted.z.scores)
 
     ymax <- max(shifted.z.scores, 2)
