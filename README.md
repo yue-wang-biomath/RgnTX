@@ -247,7 +247,7 @@ p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 ```
 ### - plotPermResults 
 The function `plotPermResults` accepts results from the output of the above permutation test functions and returns a figure visualizing permutation results. 
-![image](https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section5.6.jpg) 
+<img src = 'https://github.com/yue-wang-biomath/RgnTX/blob/master/vignettes/figures/section5.6.jpg' width = '100px'> 
 
 ## 4. Shifted z-scores over transcripts
 
