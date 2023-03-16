@@ -318,7 +318,7 @@ p_a <- plotPermResults(permTestTx_results, binwidth = 1)
 ## 4. Shifted z-scores over transcripts
 
 ### - shiftedZScoreTx
-Different from the `localZScore` function in regioneR, `shiftZScoreTX` in RgnTX can shift the transcriptome ROIs on mRNA rather than just on the genome coordinates. In the following example, we tested association of m6A and stop codon regions with window 500 and step 50. `shiftZScoreTX` shifts stop codons over the mRNA space (exons). The stop codon region tested here is formed by the last 100 nt CDS and the first 100 nt 3'UTR. As the results show, we can see m6A sites are enriched more on 3'UTR than on CDS, since the peak is deviated to the right (3') direction. 
+Different from the `localZScore` function in regioneR, `shiftZScoreTX` in RgnTX can shift the transcriptome ROIs on mRNA rather than just on the genome coordinates. In the following example, we tested association of m6A and stop codon regions with window 500 and step 50. `shiftZScoreTX` shifts stop codons over the mRNA space (exons). The stop codon region tested here is formed by the last 100 nt CDS and the first 100 nt 3'UTR. As the results show, we can see m6A sites tested here are enriched more on 3'UTR than on CDS, since the peak is deviated to the right (3') direction. 
 
 ```R
 txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
