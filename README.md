@@ -5,8 +5,8 @@ RgnTX is an R/Bioconductor tool for the colocalization analysis of transcriptome
 
 - Function `shiftedZScoreTx` is updated supprting the shifting regions of interest (ROI) over mRNA space (exons). 
 - Function `shiftExonTx` is updated for picking regions over mRNA space (exons).
-- The ReadMe file is updated providing basic examples and corresponding pseudocodes.
 - Files in /inst/extdata/Review are updated for review purpose only.
+- The ReadMe file is updated providing basic examples and corresponding pseudocodes.
 
 ## 1. Install
 To install this package via devtools, please use the following codes.
